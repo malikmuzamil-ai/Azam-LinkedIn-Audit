@@ -1,0 +1,2699 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azam LinkedIn Audit — Growlioo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════
+       GROWLIOO — MASTER DESIGN SYSTEM
+       by Malik Muzamil · Dark Edition · Accent: #7C5CFC
+       Brand Palette: #F4863F (Orange) · #FFDE59 (Yellow) · #000000 · #FFFFFF
+    ═══════════════════════════════════════════════════ */
+    :root {
+      /* Growlioo Brand Palette */
+      --growlioo-orange:  #F4863F;
+      --growlioo-yellow:  #FFDE59;
+      --growlioo-black:   #000000;
+      --growlioo-white:   #FFFFFF;
+
+      /* Accent — user colour or Growlioo Orange default */
+      --primary:          #7C5CFC;
+      --primary-dark:     #694ED6;
+      --primary-light:    #967CFC;
+      --primary-rgb:      124,92,252;
+
+      /* Dark theme surfaces */
+      --bg-page:          #0A0A0A;
+      --bg-card:          #111111;
+      --bg-card-2:        #191919;
+      --bg-card-3:        #1F1F1F;
+      --border:           rgba(255,255,255,0.07);
+      --border-bright:    rgba(255,255,255,0.12);
+
+      /* Typography */
+      --text-primary:     #FFFFFF;
+      --text-secondary:   rgba(255,255,255,0.58);
+      --text-muted:       rgba(255,255,255,0.28);
+
+      /* Score colours */
+      --score-high:       #22C55E;
+      --score-high-bg:    rgba(34,197,94,0.10);
+      --score-mid:        #F59E0B;
+      --score-mid-bg:     rgba(245,158,11,0.10);
+      --score-low:        #EF4444;
+      --score-low-bg:     rgba(239,68,68,0.10);
+
+      /* Font — Inter (Growlioo brand font) */
+      --font:             'Inter', sans-serif;
+
+      /* Radius */
+      --r-sm:   8px;
+      --r-md:   16px;
+      --r-lg:   24px;
+      --r-xl:   32px;
+      --r-pill: 9999px;
+
+      /* Shadows */
+      --shadow-card:    0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lift:    0 16px 56px rgba(0,0,0,0.6);
+      --shadow-glow:    0 0 40px rgba(var(--primary-rgb), 0.25);
+      --shadow-primary: 0 8px 32px rgba(var(--primary-rgb), 0.35);
+    }
+
+    /* ═══ RESET ══════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font);
+      background: var(--bg-page);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    ::selection { background: rgba(var(--primary-rgb), 0.35); }
+
+    /* ═══ SCROLLBAR ══════════════════════════════════ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-card); }
+    ::-webkit-scrollbar-thumb { background: rgba(var(--primary-rgb), 0.4); border-radius: 3px; }
+
+    /* ═══════════════════════════════════════════════════
+       COVER PAGE
+    ═══════════════════════════════════════════════════ */
+    .cover {
+      min-height: 100vh;
+      background: var(--bg-page);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 32px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Noise texture overlay */
+    .cover::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size: 256px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Radial glow */
+    .cover::after {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(ellipse at center,
+        rgba(var(--primary-rgb), 0.16) 0%,
+        rgba(var(--primary-rgb), 0.04) 40%,
+        transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .cover__inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+
+    /* Brand pill */
+    .cover__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--r-pill);
+      padding: 7px 18px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 56px;
+    }
+    .cover__brand-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 8px rgba(var(--primary-rgb), 0.8);
+      flex-shrink: 0;
+    }
+
+    /* SVG Score ring */
+    .cover__ring-wrap {
+      position: relative;
+      width: 240px; height: 240px;
+      margin: 0 auto 48px;
+    }
+    .ring-svg { width: 240px; height: 240px; transform: rotate(-90deg); }
+    .ring-track {
+      fill: none;
+      stroke: rgba(255,255,255,0.06);
+      stroke-width: 12;
+    }
+    .ring-fill {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-dasharray: 659.73; /* 2π × 105 */
+      stroke-dashoffset: calc(659.73 - (659.73 * 53 / 100));
+      filter: drop-shadow(0 0 12px rgba(var(--primary-rgb), 0.7));
+    }
+    .ring-inner {
+      position: absolute; inset: 16px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 2px;
+    }
+    .ring-score {
+      font-size: 64px;
+      font-weight: 900;
+      color: var(--text-primary);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+    .ring-denom {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .cover__name {
+      font-size: clamp(36px, 5.5vw, 60px);
+      font-weight: 900;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+    .cover__name em { font-style: normal; color: var(--primary); }
+
+    .cover__subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    .cover__badges {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--r-pill);
+      padding: 10px 22px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .badge--grade { border-color: rgba(var(--primary-rgb), 0.4); }
+    .badge__grade-val {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       STAT STRIP
+    ═══════════════════════════════════════════════════ */
+    .stat-strip {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-strip__inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+    }
+    .stat-item {
+      flex: 1;
+      padding: 24px 16px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-val {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+    }
+    .stat-val span { color: var(--primary); font-size: 16px; }
+    .stat-key {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       STICKY NAVIGATION TABS
+    ═══════════════════════════════════════════════════ */
+    .nav-tabs {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-tabs__inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      gap: 0;
+    }
+    .nav-tabs__inner::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 20px;
+      height: 52px;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .tab-btn:hover { color: var(--text-secondary); }
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+    .tab-btn__dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+    .tab-btn.active .tab-btn__dot { opacity: 1; }
+
+    /* Tab content panels */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ═══════════════════════════════════════════════════
+       PAGE WRAPPER
+    ═══════════════════════════════════════════════════ */
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SECTION HEADERS
+    ═══════════════════════════════════════════════════ */
+    .sec-header { margin-bottom: 40px; }
+    .sec-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .sec-eyebrow::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: var(--primary);
+      border-radius: 1px;
+      display: inline-block;
+    }
+    .sec-title {
+      font-size: clamp(24px, 3.5vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    .sec-title em { font-style: normal; color: var(--primary); }
+    .sec-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       RADAR CHART (overview)
+    ═══════════════════════════════════════════════════ */
+    .radar-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 40px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .radar-svg-wrap { display: flex; justify-content: center; }
+    .radar-svg { width: 100%; max-width: 320px; overflow: visible; }
+    .radar-grid { fill: none; stroke: var(--border-bright); stroke-width: 0.8; }
+    .radar-axis { stroke: var(--border); stroke-width: 0.8; }
+    .radar-area {
+      fill: rgba(var(--primary-rgb), 0.18);
+      stroke: var(--primary);
+      stroke-width: 2;
+      filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.4));
+    }
+    .radar-point { fill: var(--primary); }
+    .radar-label {
+      font-family: var(--font);
+      font-size: 9px;
+      font-weight: 700;
+      fill: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .radar-legend { display: flex; flex-direction: column; gap: 14px; }
+    .radar-legend-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .radar-legend-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .legend-bar-track {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--r-pill);
+      overflow: hidden;
+    }
+    .legend-bar-fill {
+      height: 100%;
+      border-radius: var(--r-pill);
+    }
+    .legend-bar-fill--high { background: var(--score-high); }
+    .legend-bar-fill--mid  { background: var(--score-mid); }
+    .legend-bar-fill--low  { background: var(--score-low); }
+    .legend-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      width: 130px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .legend-score {
+      font-size: 13px;
+      font-weight: 800;
+      width: 32px;
+      text-align: right;
+    }
+    .legend-score--high { color: var(--score-high); }
+    .legend-score--mid  { color: var(--score-mid); }
+    .legend-score--low  { color: var(--score-low); }
+
+    /* ═══════════════════════════════════════════════════
+       SCORE CARDS GRID
+    ═══════════════════════════════════════════════════ */
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .score-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 24px 22px 20px;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .score-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lift);
+    }
+    .score-card--high { border-top: 3px solid var(--score-high); }
+    .score-card--high:hover { border-color: var(--score-high); }
+    .score-card--mid  { border-top: 3px solid var(--score-mid); }
+    .score-card--mid:hover  { border-color: var(--score-mid); }
+    .score-card--low  { border-top: 3px solid var(--score-low); }
+    .score-card--low:hover  { border-color: var(--score-low); }
+
+    /* Subtle number watermark */
+    .score-card::after {
+      content: attr(data-n);
+      position: absolute;
+      right: 12px; bottom: -8px;
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      opacity: 0.055;
+      pointer-events: none;
+      letter-spacing: -0.04em;
+    }
+    .score-card--high::after { color: var(--score-high); }
+    .score-card--mid::after  { color: var(--score-mid); }
+    .score-card--low::after  { color: var(--score-low); }
+
+    .score-card__section {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .score-card__row {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .score-card__n {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .score-card--high .score-card__n { color: var(--score-high); }
+    .score-card--mid  .score-card__n { color: var(--score-mid); }
+    .score-card--low  .score-card__n { color: var(--score-low); }
+    .score-card__d {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    /* Mini donut chart in score card */
+    .score-donut {
+      width: 44px; height: 44px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .donut-track { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 5; }
+    .donut-fill {
+      fill: none;
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-dasharray: 100;
+    }
+    .donut-fill--high { stroke: var(--score-high); }
+    .donut-fill--mid  { stroke: var(--score-mid); }
+    .donut-fill--low  { stroke: var(--score-low); }
+
+    .score-bar-track {
+      height: 5px;
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--r-pill);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .score-bar-fill { height: 100%; border-radius: var(--r-pill); }
+    .score-card--high .score-bar-fill { background: var(--score-high); }
+    .score-card--mid  .score-bar-fill { background: var(--score-mid); }
+    .score-card--low  .score-bar-fill { background: var(--score-low); }
+
+    .score-card__diag {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       BRAND COLOUR PALETTE — FULL CARD DESIGN
+    ═══════════════════════════════════════════════════ */
+    .palette-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .palette-card__head {
+      background: var(--bg-card-2);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 36px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .palette-card__head-text h3 {
+      font-size: 18px; font-weight: 800; color: var(--text-primary);
+      letter-spacing: -0.02em; margin-bottom: 4px;
+    }
+    .palette-card__head-text p { font-size: 13px; color: var(--text-secondary); }
+    .palette-card__badge {
+      background: rgba(var(--primary-rgb),.12);
+      border: 1px solid rgba(var(--primary-rgb),.25);
+      border-radius: var(--r-pill);
+      padding: 6px 16px; font-size: 11px; font-weight: 700;
+      color: var(--primary); white-space: nowrap; flex-shrink: 0;
+    }
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+    .color-card {
+      background: var(--bg-card);
+      padding: 0;
+      display: flex; flex-direction: column;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
+    }
+    .color-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); z-index: 2; }
+    .color-card__swatch {
+      height: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+    .color-card__swatch::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.3) 100%);
+    }
+    .color-card__shimmer {
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .color-card:hover .color-card__shimmer { transform: translateX(100%); }
+    .color-card__info {
+      padding: 16px;
+      display: flex; flex-direction: column; gap: 6px;
+      flex: 1;
+    }
+    .color-card__role {
+      font-size: 9px; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+    .color-card__name {
+      font-size: 14px; font-weight: 700; color: var(--text-primary);
+    }
+    .color-card__hex-row {
+      display: flex; align-items: center; gap: 8px; margin-top: 4px;
+    }
+    .color-card__hex {
+      font-family: monospace; font-size: 12px; font-weight: 700;
+      color: var(--text-secondary); letter-spacing: 0.04em;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      border-radius: 6px; padding: 3px 8px; flex: 1;
+    }
+    .color-copy-btn {
+      width: 28px; height: 28px; border-radius: 7px; border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); transition: all 0.18s ease; flex-shrink: 0;
+    }
+    .color-copy-btn:hover { background: rgba(var(--primary-rgb),.15); border-color: rgba(var(--primary-rgb),.4); color: var(--primary); }
+    .color-copy-btn svg { width: 13px; height: 13px; }
+    .color-copy-btn.copied { background: rgba(34,197,94,.15); border-color: rgba(34,197,94,.4); color: #22C55E; }
+    /* Toast */
+    .copy-toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--bg-card-3); border: 1px solid var(--border-bright);
+      border-radius: var(--r-pill); padding: 10px 24px;
+      font-size: 13px; font-weight: 600; color: var(--text-primary);
+      box-shadow: var(--shadow-lift); opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none; z-index: 9999; white-space: nowrap;
+    }
+    .copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ═══════════════════════════════════════════════════
+       PROBLEM CARDS
+    ═══════════════════════════════════════════════════ */
+    .problems { display: flex; flex-direction: column; gap: 16px; }
+
+    .problem-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .problem-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lift);
+    }
+
+    .problem-card__num-col {
+      background: linear-gradient(180deg, rgba(var(--primary-rgb),0.15) 0%, rgba(var(--primary-rgb),0.05) 100%);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 28px 0;
+    }
+    .problem-n {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .problem-n-label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .problem-card__body { padding: 28px 32px; }
+    .problem-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .problem-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.78;
+      margin-bottom: 16px;
+    }
+    .problem-cost {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--score-low-bg);
+      color: var(--score-low);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: var(--r-pill);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SECTION AUDIT CARDS
+    ═══════════════════════════════════════════════════ */
+    .audit-cards { display: flex; flex-direction: column; gap: 24px; }
+
+    .audit-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: box-shadow 0.2s ease;
+    }
+    .audit-card:hover { box-shadow: var(--shadow-lift); }
+
+    .audit-card__head {
+      background: var(--bg-card-2);
+      border-bottom: 1px solid var(--border);
+      padding: 22px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .audit-card__head-left { display: flex; align-items: center; gap: 12px; }
+    .audit-card__idx {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 3px 8px;
+    }
+    .audit-card__name {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .audit-card__score-badge {
+      background: var(--primary);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 6px 18px;
+      border-radius: var(--r-pill);
+      box-shadow: var(--shadow-primary);
+      flex-shrink: 0;
+    }
+
+    .audit-card__body { padding: 32px; display: flex; flex-direction: column; gap: 20px; }
+
+    /* Content blocks inside audit cards */
+    .block { border-radius: var(--r-md); padding: 20px 22px; }
+
+    .block--current {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+    }
+    .block--diag {
+      background: rgba(var(--primary-rgb), 0.05);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 var(--r-md) var(--r-md) 0;
+    }
+    .block--rewrite {
+      background: var(--bg-card-3);
+      border: 1.5px solid rgba(var(--primary-rgb), 0.35);
+      border-radius: var(--r-lg);
+      position: relative;
+      padding-top: 28px;
+    }
+    .block--tip {
+      background: var(--score-high-bg);
+      border-left: 3px solid var(--score-high);
+      border-radius: 0 var(--r-md) var(--r-md) 0;
+    }
+
+    /* Floating label on rewrite block */
+    .block--rewrite::before {
+      content: 'PASTE-READY COPY';
+      position: absolute;
+      top: -1px; left: 20px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      padding: 4px 12px;
+      border-radius: 0 0 var(--r-sm) var(--r-sm);
+    }
+
+    .block__label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .block--current .block__label { color: var(--text-muted); }
+    .block--diag    .block__label { color: var(--primary); }
+    .block--rewrite .block__label { color: rgba(var(--primary-rgb), 0.7); }
+    .block--tip     .block__label { color: var(--score-high); }
+
+    .block__text {
+      font-size: 14px;
+      line-height: 1.78;
+      white-space: pre-wrap;
+    }
+    .block--current .block__text { color: var(--text-secondary); font-style: italic; }
+    .block--diag    .block__text { color: var(--text-secondary); }
+    .block--rewrite .block__text { color: var(--text-primary); font-weight: 500; }
+    .block--tip     .block__text { color: rgba(34,197,94,0.9); font-size: 13px; }
+
+    /* ═══════════════════════════════════════════════════
+       BANNER BRIEF
+    ═══════════════════════════════════════════════════ */
+    .banner-brief {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+    .banner-brief__top {
+      background: var(--bg-card-2);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner-brief__top::after {
+      content: '';
+      position: absolute; right: -40px; top: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(var(--primary-rgb),0.12) 0%, transparent 70%);
+    }
+    .banner-brief__top-text h3 {
+      font-size: 20px; font-weight: 800;
+      color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 4px;
+    }
+    .banner-brief__top-text p { font-size: 13px; color: var(--text-secondary); }
+    .banner-brief__tool {
+      background: rgba(var(--primary-rgb), 0.12);
+      border: 1px solid rgba(var(--primary-rgb), 0.25);
+      border-radius: var(--r-md);
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+      position: relative; z-index: 1;
+    }
+    .banner-brief__rows { padding: 8px 0; }
+    .banner-brief__row {
+      display: grid;
+      grid-template-columns: 156px 1fr;
+      gap: 16px;
+      align-items: baseline;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .banner-brief__row:last-child { border-bottom: none; }
+    .banner-brief__key {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--primary);
+    }
+    .banner-brief__val {
+      font-size: 14px; color: var(--text-secondary); line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       NEXT STEPS
+    ═══════════════════════════════════════════════════ */
+    .next-steps { display: flex; flex-direction: column; gap: 12px; }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .step-card:hover {
+      transform: translateX(6px);
+      border-color: rgba(var(--primary-rgb), 0.25);
+      box-shadow: var(--shadow-card);
+    }
+    .step-num {
+      width: 48px; height: 48px;
+      background: var(--primary);
+      border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 900; color: #fff;
+      box-shadow: var(--shadow-primary);
+      flex-shrink: 0;
+    }
+    .step-title {
+      font-size: 15px; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 4px;
+    }
+    .step-desc {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.55;
+    }
+    .step-time {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--r-pill);
+      padding: 5px 12px;
+      font-size: 11px; font-weight: 700;
+      color: var(--text-muted); white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       FINAL CTA
+    ═══════════════════════════════════════════════════ */
+    /* Workshop CTA */
+    .wcta { position:relative;overflow:hidden;margin-top:40px;border-radius:28px;padding:2px;background:linear-gradient(135deg,rgba(var(--primary-rgb),.6),rgba(var(--primary-rgb),.1),rgba(var(--primary-rgb),.4)); }
+    .wcta-inner-wrap { background:linear-gradient(135deg,#0D0609 0%,#150811 50%,#0D0609 100%);border-radius:26px;padding:60px 40px;text-align:center;position:relative;overflow:hidden; }
+    .wcta-glow { position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:500px;background:radial-gradient(ellipse,rgba(var(--primary-rgb),.22) 0%,transparent 65%);pointer-events:none;animation:glowPulse 3s ease-in-out infinite; }
+    .wcta-glow2 { position:absolute;bottom:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(var(--primary-rgb),.1) 0%,transparent 70%);pointer-events:none; }
+    @keyframes glowPulse { 0%,100%{opacity:.6}50%{opacity:1} }
+    .wcta-content { position:relative;z-index:1; }
+    .wcta-live-badge { display:inline-flex;align-items:center;gap:8px;background:rgba(var(--primary-rgb),.15);border:1px solid rgba(var(--primary-rgb),.4);border-radius:var(--r-pill);padding:7px 18px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin-bottom:24px; }
+    .live-dot { width:8px;height:8px;background:#EF4444;border-radius:50%;animation:pulse 1.5s ease-in-out infinite;box-shadow:0 0 8px rgba(239,68,68,.8); }
+    .wcta-title { font-size:clamp(22px,3.5vw,40px);font-weight:900;color:var(--white);letter-spacing:-.03em;line-height:1.1;margin-bottom:16px; }
+    .wcta-title em { font-style:normal;color:var(--primary); }
+    .wcta-desc { font-size:14px;color:rgba(255,255,255,.58);margin-bottom:16px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.75; }
+    .wcta-dm-line { display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:32px;font-size:13px;color:rgba(255,255,255,.6); }
+    .wcta-dm-keyword { font-family:monospace;font-size:14px;font-weight:700;color:var(--white);background:rgba(var(--primary-rgb),.2);border:1px solid rgba(var(--primary-rgb),.4);padding:4px 14px;border-radius:8px;letter-spacing:.04em; }
+    .wcta-btn { display:inline-flex;align-items:center;gap:10px;background:var(--primary);color:var(--white);font-family:var(--font);font-size:15px;font-weight:700;padding:18px 40px;border-radius:var(--r-pill);text-decoration:none;box-shadow:0 8px 40px rgba(var(--primary-rgb),.5);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden; }
+    .wcta-btn::before { content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-100%);transition:transform .5s; }
+    .wcta-btn:hover::before { transform:translateX(100%); }
+    .wcta-btn:hover { transform:translateY(-3px);box-shadow:0 16px 56px rgba(var(--primary-rgb),.65); }
+    .wcta-urgency { margin-top:16px;font-size:11px;color:rgba(255,255,255,.3); }
+    .wcta-spots { display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:var(--r-pill);padding:4px 12px;font-size:10px;font-weight:700;color:#F59E0B;margin-top:12px; }
+    .wcta-pillars { display:flex;align-items:center;justify-content:center;gap:24px;margin-bottom:28px;flex-wrap:wrap; }
+    .wcta-pillar { display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:rgba(255,255,255,.7); }
+    .wcta-pillar svg { color:var(--primary);flex-shrink:0; }
+
+    /* ═══════════════════════════════════════════════════
+       MASTERCLASS TAB
+    ═══════════════════════════════════════════════════ */
+    .mc-intro { background:var(--bg-card-2);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px 32px;margin-bottom:28px; }
+    .mc-intro__eyebrow { font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:10px; }
+    .mc-intro__title { font-size:22px;font-weight:800;color:var(--text-primary);margin-bottom:10px;letter-spacing:-.02em; }
+    .mc-intro__body { font-size:14px;color:var(--text-secondary);line-height:1.75; }
+    .mc-source { display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:11px;color:var(--text-muted);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--r-pill);padding:4px 12px; }
+    .mc-source strong { color:var(--text-secondary); }
+    .mc-lesson { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:0;margin-bottom:16px;overflow:hidden; }
+    .mc-lesson__header { padding:20px 24px;display:flex;align-items:center;gap:14px;cursor:pointer;user-select:none; }
+    .mc-lesson__num { width:32px;height:32px;border-radius:50%;background:rgba(var(--primary-rgb),.12);border:1px solid rgba(var(--primary-rgb),.25);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--primary);flex-shrink:0; }
+    .mc-lesson__title { font-size:15px;font-weight:700;color:var(--text-primary);flex:1; }
+    .mc-lesson__tag { font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:var(--r-pill);background:rgba(var(--primary-rgb),.1);color:var(--primary);flex-shrink:0; }
+    .mc-lesson__chevron { color:var(--text-muted);transition:transform .25s;flex-shrink:0; }
+    .mc-lesson.open .mc-lesson__chevron { transform:rotate(180deg); }
+    .mc-lesson__body { display:none;padding:0 24px 24px; }
+    .mc-lesson.open .mc-lesson__body { display:block; }
+    .mc-lesson__body p { font-size:13px;color:var(--text-secondary);line-height:1.75;margin-bottom:12px; }
+    .mc-lesson__body p:last-child { margin-bottom:0; }
+    .mc-stat-row { display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0; }
+    .mc-stat { background:var(--bg-card-2);border:1px solid var(--border);border-radius:var(--r-md);padding:14px;text-align:center; }
+    .mc-stat__num { font-size:22px;font-weight:900;color:var(--primary);display:block; }
+    .mc-stat__label { font-size:11px;color:var(--text-muted);margin-top:3px;line-height:1.4; }
+    .mc-rule { display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border-subtle); }
+    .mc-rule:last-child { border-bottom:none; }
+    .mc-rule__icon { width:20px;height:20px;border-radius:50%;background:rgba(var(--primary-rgb),.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px; }
+    .mc-rule__icon svg { width:10px;height:10px;color:var(--primary); }
+    .mc-rule__text { font-size:13px;color:var(--text-secondary);line-height:1.6; }
+    .mc-rule__text strong { color:var(--text-primary);font-weight:600; }
+    .mc-cta-strip { background:linear-gradient(135deg,rgba(var(--primary-rgb),.12),rgba(var(--primary-rgb),.04));border:1px solid rgba(var(--primary-rgb),.2);border-radius:var(--r-lg);padding:24px 28px;margin-top:28px;display:flex;align-items:center;gap:20px; }
+    .mc-cta-strip__text { flex:1; }
+    .mc-cta-strip__text h4 { font-size:16px;font-weight:800;color:var(--text-primary);margin-bottom:4px; }
+    .mc-cta-strip__text p { font-size:13px;color:var(--text-secondary); }
+    .mc-cta-strip__btn { display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;font-size:13px;font-weight:700;padding:12px 24px;border-radius:var(--r-pill);text-decoration:none;white-space:nowrap;flex-shrink:0;transition:transform .2s,box-shadow .2s; }
+    .mc-cta-strip__btn:hover { transform:translateY(-2px);box-shadow:0 8px 24px rgba(var(--primary-rgb),.4); }
+
+    /* ═══════════════════════════════════════════════════
+       COMPACT TAB CTA — appears at bottom of every tab
+       except Next Steps (which uses the full .wcta block)
+    ═══════════════════════════════════════════════════ */
+    .tab-cta {
+      display: flex; align-items: center; gap: 20px;
+      background: var(--bg-card-2);
+      border: 1px solid rgba(var(--primary-rgb), 0.18);
+      border-radius: var(--r-lg);
+      padding: 22px 28px;
+      margin-top: 40px;
+    }
+    .tab-cta__text { flex: 1; }
+    .tab-cta__text h4 {
+      font-size: 15px; font-weight: 800;
+      color: var(--text-primary); margin-bottom: 4px;
+      letter-spacing: -.01em;
+    }
+    .tab-cta__text p {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+    }
+    .tab-cta__btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--primary);
+      color: #fff;
+      font-family: var(--font); font-size: 13px; font-weight: 700;
+      padding: 13px 24px;
+      border-radius: var(--r-pill);
+      text-decoration: none;
+      white-space: nowrap; flex-shrink: 0;
+      box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.38);
+      transition: transform .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .tab-cta__btn::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+      transform: translateX(-100%); transition: transform .45s;
+    }
+    .tab-cta__btn:hover::before { transform: translateX(100%); }
+    .tab-cta__btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(var(--primary-rgb), 0.55); }
+    .tab-cta__btn svg { flex-shrink: 0; }
+    @media (max-width: 600px) {
+      .tab-cta { flex-direction: column; align-items: flex-start; gap: 14px; }
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SCROLLING TICKER
+    ═══════════════════════════════════════════════════ */
+    .ticker-wrap { overflow:hidden;background:rgba(var(--primary-rgb),.08);border-top:1px solid rgba(var(--primary-rgb),.2);border-bottom:1px solid rgba(var(--primary-rgb),.2);padding:10px 0;position:relative; }
+    .ticker-wrap::before,.ticker-wrap::after { content:'';position:absolute;top:0;width:80px;height:100%;z-index:2;pointer-events:none; }
+    .ticker-wrap::before { left:0;background:linear-gradient(90deg,var(--bg-page),transparent); }
+    .ticker-wrap::after  { right:0;background:linear-gradient(-90deg,var(--bg-page),transparent); }
+    .ticker-track { display:flex;gap:0;width:max-content;animation:ticker 28s linear infinite; }
+    .ticker-track:hover { animation-play-state:paused; }
+    .ticker-item { display:inline-flex;align-items:center;gap:8px;padding:0 32px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);white-space:nowrap; }
+    .ticker-item em { color:var(--primary);font-style:normal; }
+    .ticker-dot { width:4px;height:4px;border-radius:50%;background:rgba(var(--primary-rgb),.6);flex-shrink:0; }
+    @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* ═══════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════ */
+    .footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .footer__inner { max-width: 960px; margin: 0 auto; }
+    .footer__brand { font-size: 14px; font-weight: 800; color: var(--primary); }
+    .footer__meta { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+    /* ═══════════════════════════════════════════════════
+       ANIMATIONS — PREMIUM SET
+    ═══════════════════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.88); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.6; }
+      50%       { opacity: 1; }
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0px) scale(1); opacity: 0.6; }
+      50%  { transform: translateY(-18px) scale(1.04); opacity: 1; }
+      100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+    }
+    @keyframes ringDraw {
+      from { stroke-dashoffset: 659.73; }
+    }
+    @keyframes shimmerSlide {
+      0%   { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.15); opacity: 0.7; }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes popIn {
+      0%   { opacity: 0; transform: scale(0.8) translateY(10px); }
+      70%  { transform: scale(1.04) translateY(-2px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes borderGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0); }
+      50%       { box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.15); }
+    }
+
+    .anim-up      { animation: fadeUp  0.7s cubic-bezier(0.16,1,0.3,1) both; }
+    .anim-scale   { animation: scaleIn 0.65s cubic-bezier(0.16,1,0.3,1) both; }
+    .anim-d1 { animation-delay: 0.08s; }
+    .anim-d2 { animation-delay: 0.18s; }
+    .anim-d3 { animation-delay: 0.28s; }
+    .anim-d4 { animation-delay: 0.38s; }
+    .anim-d5 { animation-delay: 0.48s; }
+
+    /* Ring draws itself on load */
+    .ring-fill { animation: ringDraw 1.8s cubic-bezier(0.16,1,0.3,1) 0.6s both; }
+
+    /* Floating particles on cover */
+    .cover-particle {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(var(--primary-rgb),0.7), transparent);
+      pointer-events: none; z-index: 0;
+      animation: floatUp var(--dur, 4s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    /* Rewrite block shimmer on hover */
+    .block--rewrite {
+      background: var(--bg-card-3);
+      border: 1.5px solid rgba(var(--primary-rgb), 0.35);
+      border-radius: var(--r-lg);
+      position: relative;
+      padding-top: 28px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .block--rewrite:hover {
+      border-color: rgba(var(--primary-rgb), 0.6);
+      box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.08), var(--shadow-card);
+    }
+
+    /* Score card pop on reveal */
+    .score-card.reveal-pop { animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+
+    /* Step card slide in */
+    .step-card.reveal-slide { animation: slideInLeft 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+
+    /* Stat value shimmer while counting */
+    .stat-val.counting {
+      background: linear-gradient(90deg, var(--text-primary) 30%, rgba(var(--primary-rgb),0.9) 50%, var(--text-primary) 70%);
+      background-size: 400px 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerSlide 1.2s linear infinite;
+    }
+
+    /* Problem card border glow */
+    .problem-card { animation: borderGlow 3s ease-in-out infinite; animation-play-state: paused; }
+    .problem-card.visible { animation-play-state: running; }
+
+    /* ═══════════════════════════════════════════════════
+       PRINT
+    ═══════════════════════════════════════════════════ */
+    @media print {
+      .nav-tabs, .stat-strip { display: none; }
+      .tab-panel { display: block !important; }
+      .cover { min-height: auto; padding: 60px; page-break-after: always; }
+      .audit-card { page-break-inside: avoid; }
+      .problem-card { page-break-inside: avoid; }
+    }
+
+    /* ═══════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .score-grid { grid-template-columns: repeat(2, 1fr); }
+      .radar-wrap { grid-template-columns: 1fr; }
+      .radar-svg-wrap { order: 2; }
+      .radar-legend { order: 1; }
+      .step-card { grid-template-columns: 48px 1fr; }
+      .step-time { display: none; }
+      .banner-brief__row { grid-template-columns: 1fr; gap: 4px; padding: 14px 24px; }
+    }
+    @media (max-width: 520px) {
+      .score-grid { grid-template-columns: 1fr; }
+      .problem-card { grid-template-columns: 1fr; }
+      .problem-card__num-col { flex-direction: row; justify-content: flex-start; gap: 12px; padding: 16px 24px; }
+      .stat-strip__inner { flex-wrap: wrap; }
+      .stat-item { min-width: 50%; }
+      .cover__name { font-size: 32px; }
+      .final-cta { padding: 48px 24px; }
+      .audit-card__body { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     REUSABLE COMPONENT — TAB CTA STRIP
+     Add this block at the bottom of EVERY tab panel
+     EXCEPT the Next Steps tab (which has the full .wcta).
+     Copy this exact block. Do not modify copy or href.
+══════════════════════════════════════════════════ -->
+<!--
+<div class="tab-cta">
+  <div class="tab-cta__text">
+    <h4>Still posting and waiting for leads?</h4>
+    <p>We built an AI system that runs your LinkedIn for you — content, comments, outreach — on autopilot.</p>
+  </div>
+  <a href="https://linkedai.growlioo.com/" target="_blank" rel="noopener" class="tab-cta__btn">
+    Install LinkedAI
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</div>
+-->
+
+<!-- ══════════════ COVER ══════════════ -->
+<section class="cover">
+  <!-- Floating ambient particles -->
+  <div class="cover-particle" style="width:6px;height:6px;top:20%;left:15%;--dur:5s;--delay:0s;"></div>
+  <div class="cover-particle" style="width:4px;height:4px;top:35%;left:80%;--dur:6.5s;--delay:1s;"></div>
+  <div class="cover-particle" style="width:8px;height:8px;top:70%;left:25%;--dur:4.5s;--delay:2s;"></div>
+  <div class="cover-particle" style="width:5px;height:5px;top:60%;left:70%;--dur:7s;--delay:0.5s;"></div>
+  <div class="cover-particle" style="width:3px;height:3px;top:85%;left:50%;--dur:5.5s;--delay:1.5s;"></div>
+  <div class="cover__inner">
+    <p class="cover__brand anim-up anim-d1">
+      <span class="cover__brand-dot"></span>
+      Growlioo &nbsp;&middot;&nbsp; LinkedIn Audit &nbsp;&middot;&nbsp; Malik Muzamil
+    </p>
+
+    <div class="cover__ring-wrap anim-scale anim-d2">
+      <svg class="ring-svg" viewBox="0 0 240 240">
+        <circle class="ring-track" cx="120" cy="120" r="105"/>
+        <circle class="ring-fill"  cx="120" cy="120" r="105"/>
+      </svg>
+      <div class="ring-inner">
+        <span class="ring-score">53</span>
+        <span class="ring-denom">OUT OF 100</span>
+      </div>
+    </div>
+
+    <h1 class="cover__name anim-up anim-d3">
+      Azam's <em>LinkedIn</em><br>Audit Report
+    </h1>
+    <p class="cover__subtitle anim-up anim-d4">
+      Growlioo &nbsp;&middot;&nbsp; Analysed 30 June 2026
+    </p>
+
+    <div class="cover__badges anim-up anim-d5">
+      <span class="badge badge--grade">
+        Profile Grade &nbsp;<span class="badge__grade-val">C</span>
+      </span>
+      <span class="badge">9 Sections Audited</span>
+      <span class="badge">Rewritten Copy Included</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ STAT STRIP ══════════════ -->
+<div class="stat-strip">
+  <div class="stat-strip__inner">
+    <div class="stat-item" data-count-to="53">
+      <span class="stat-val">0<span>/100</span></span>
+      <span class="stat-key">Overall Score</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">C</span>
+      <span class="stat-key">Grade</span>
+    </div>
+    <div class="stat-item" data-count-to="7">
+      <span class="stat-val">0<span>/10</span></span>
+      <span class="stat-key">Strongest Section</span>
+    </div>
+    <div class="stat-item" data-count-to="0">
+      <span class="stat-val">0<span>/10</span></span>
+      <span class="stat-key">Biggest Gap</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">3</span>
+      <span class="stat-key">Critical Issues</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SCROLLING TICKER ══════════════ -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-item"><em>9 Sections Audited</em><span class="ticker-dot"></span></span>
+    <span class="ticker-item">Score Out of 100<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><em>Rewritten Copy Included</em><span class="ticker-dot"></span></span>
+    <span class="ticker-item">Section-by-Section Breakdown<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><em>Top 3 Issues Identified</em><span class="ticker-dot"></span></span>
+    <span class="ticker-item">Banner Design Brief<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><em>Headline Rewrites</em><span class="ticker-dot"></span></span>
+    <span class="ticker-item">About Section Rewrite<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><em>Step-by-Step Action Plan</em><span class="ticker-dot"></span></span>
+    <span class="ticker-item">Powered by Growlioo<span class="ticker-dot"></span></span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item"><em>9 Sections Audited</em><span class="ticker-dot"></span></span>
+    <span class="ticker-item">Score Out of 100<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><em>Rewritten Copy Included</em><span class="ticker-dot"></span></span>
+    <span class="ticker-item">Section-by-Section Breakdown<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><em>Top 3 Issues Identified</em><span class="ticker-dot"></span></span>
+    <span class="ticker-item">Banner Design Brief<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><em>Headline Rewrites</em><span class="ticker-dot"></span></span>
+    <span class="ticker-item">About Section Rewrite<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><em>Step-by-Step Action Plan</em><span class="ticker-dot"></span></span>
+    <span class="ticker-item">Powered by Growlioo<span class="ticker-dot"></span></span>
+  </div>
+</div>
+
+<!-- ══════════════ STICKY TAB NAV ══════════════ -->
+<nav class="nav-tabs">
+  <div class="nav-tabs__inner">
+    <button class="tab-btn active" onclick="switchTab('dashboard', this)">
+      <span class="tab-btn__dot"></span>Score Dashboard
+    </button>
+    <button class="tab-btn" onclick="switchTab('problems', this)">
+      <span class="tab-btn__dot"></span>Top 3 Issues
+    </button>
+    <button class="tab-btn" onclick="switchTab('photo', this)">
+      <span class="tab-btn__dot"></span>Profile Photo
+    </button>
+    <button class="tab-btn" onclick="switchTab('banner', this)">
+      <span class="tab-btn__dot"></span>Banner
+    </button>
+    <button class="tab-btn" onclick="switchTab('headline', this)">
+      <span class="tab-btn__dot"></span>Headline
+    </button>
+    <button class="tab-btn" onclick="switchTab('about', this)">
+      <span class="tab-btn__dot"></span>About Section
+    </button>
+    <button class="tab-btn" onclick="switchTab('featured', this)">
+      <span class="tab-btn__dot"></span>Featured
+    </button>
+    <button class="tab-btn" onclick="switchTab('experience', this)">
+      <span class="tab-btn__dot"></span>Experience
+    </button>
+    <button class="tab-btn" onclick="switchTab('skills', this)">
+      <span class="tab-btn__dot"></span>Skills
+    </button>
+    <button class="tab-btn" onclick="switchTab('activity', this)">
+      <span class="tab-btn__dot"></span>Activity
+    </button>
+    <button class="tab-btn" onclick="switchTab('niche', this)">
+      <span class="tab-btn__dot"></span>Niche Density
+    </button>
+    <button class="tab-btn" onclick="switchTab('nextsteps', this)">
+      <span class="tab-btn__dot"></span>Next Steps
+    </button>
+    <button class="tab-btn" onclick="switchTab('masterclass', this)">
+      <span class="tab-btn__dot"></span>&#127891; Masterclass
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════ TAB: DASHBOARD ══════════════ -->
+<div id="tab-dashboard" class="tab-panel active">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Score Breakdown</span>
+      <h2 class="sec-title">Your <em>Profile Dashboard</em></h2>
+      <p class="sec-desc">Every section scored out of 10. Colour-coded so you know exactly where to focus first.</p>
+    </div>
+
+    <!-- Radar chart + legend -->
+    <div class="radar-wrap">
+      <div class="radar-svg-wrap">
+        <!-- Claude: generate actual SVG polygon points based on 9 scores.
+             Use a 9-sided polygon with centre at 160,160, max-radius=130.
+             Each axis at angle: i * 40deg (360/9). Score N = (N/10) * 130 radius.
+             Render 5 grid rings at 20%,40%,60%,80%,100% of 130. -->
+        <svg class="radar-svg" viewBox="0 0 320 320">
+          <!-- Grid rings (5 levels) -->
+          <polygon class="radar-grid" points="160.0,30.0 243.6,60.4 288.0,137.4 272.6,225.0 204.5,282.2 115.5,282.2 47.4,225.0 32.0,137.4 76.4,60.4"/>
+          <polygon class="radar-grid" points="160.0,56.0 226.8,80.3 262.4,141.9 250.1,212.0 195.6,257.7 124.4,257.7 69.9,212.0 57.6,141.9 93.2,80.3"/>
+          <polygon class="radar-grid" points="160.0,82.0 210.1,100.2 236.8,146.5 227.5,199.0 186.7,233.3 133.3,233.3 92.5,199.0 83.2,146.5 109.9,100.2"/>
+          <polygon class="radar-grid" points="160.0,108.0 193.4,120.2 211.2,151.0 205.0,186.0 177.8,208.9 142.2,208.9 115.0,186.0 108.8,151.0 126.6,120.2"/>
+          <polygon class="radar-grid" points="160.0,134.0 176.7,140.1 185.6,155.5 182.5,173.0 168.9,184.4 151.1,184.4 137.5,173.0 134.4,155.5 143.3,140.1"/>
+          <!-- Axis lines -->
+          <line class="radar-axis" x1="160" y1="160" x2="160.0" y2="30.0"/>
+          <line class="radar-axis" x1="160" y1="160" x2="243.6" y2="60.4"/>
+          <line class="radar-axis" x1="160" y1="160" x2="288.0" y2="137.4"/>
+          <line class="radar-axis" x1="160" y1="160" x2="272.6" y2="225.0"/>
+          <line class="radar-axis" x1="160" y1="160" x2="204.5" y2="282.2"/>
+          <line class="radar-axis" x1="160" y1="160" x2="115.5" y2="282.2"/>
+          <line class="radar-axis" x1="160" y1="160" x2="47.4" y2="225.0"/>
+          <line class="radar-axis" x1="160" y1="160" x2="32.0" y2="137.4"/>
+          <line class="radar-axis" x1="160" y1="160" x2="76.4" y2="60.4"/>
+          <!-- Score polygon -->
+          <polygon class="radar-area" points="160.0,69.0 218.5,90.3 236.8,146.5 227.5,199.0 160.0,160.0 128.9,245.5 103.7,192.5 96.0,148.7 118.2,110.2"/>
+          <!-- Score dots -->
+          <circle class="radar-point" cx="160.0" cy="69.0" r="4"/>
+          <circle class="radar-point" cx="218.5" cy="90.3" r="4"/>
+          <circle class="radar-point" cx="236.8" cy="146.5" r="4"/>
+          <circle class="radar-point" cx="227.5" cy="199.0" r="4"/>
+          <circle class="radar-point" cx="160.0" cy="160.0" r="4"/>
+          <circle class="radar-point" cx="128.9" cy="245.5" r="4"/>
+          <circle class="radar-point" cx="103.7" cy="192.5" r="4"/>
+          <circle class="radar-point" cx="96.0" cy="148.7" r="4"/>
+          <circle class="radar-point" cx="118.2" cy="110.2" r="4"/>
+          <!-- Labels -->
+          <text class="radar-label" x="160.0" y="6.0" text-anchor="middle">Profile Photo</text>
+          <text class="radar-label" x="259.0" y="42.0" text-anchor="start">Banner</text>
+          <text class="radar-label" x="311.7" y="133.3" text-anchor="start">Headline</text>
+          <text class="radar-label" x="293.4" y="237.0" text-anchor="start">About Section</text>
+          <text class="radar-label" x="212.7" y="304.7" text-anchor="start">Featured</text>
+          <text class="radar-label" x="107.3" y="304.7" text-anchor="end">Experience</text>
+          <text class="radar-label" x="26.6" y="237.0" text-anchor="end">Skills</text>
+          <text class="radar-label" x="8.3" y="133.3" text-anchor="end">Content Activity</text>
+          <text class="radar-label" x="61.0" y="42.0" text-anchor="end">Niche Density</text>
+        </svg>
+      </div>
+
+      <div class="radar-legend">
+        <p class="radar-legend-title">Section Scores</p>
+        <p class="radar-legend-sub">Hover any card below for detail. Each section is scored out of 10 based on ICP clarity, conversion power, and credibility signals.</p>
+
+        <!-- Claude: generate one legend-row per section, pick --high/mid/low class based on score.
+             data-w = N*10 (percentage). Bars start at 0 and animate on scroll. -->
+        <div class="legend-row">
+          <span class="legend-label">Profile Photo</span>
+          <div class="legend-bar-track"><div class="legend-bar-fill legend-bar-fill--mid" style="width:0%" data-w="70"></div></div>
+          <span class="legend-score legend-score--mid">7/10</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-label">Banner</span>
+          <div class="legend-bar-track"><div class="legend-bar-fill legend-bar-fill--mid" style="width:0%" data-w="70"></div></div>
+          <span class="legend-score legend-score--mid">7/10</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-label">Headline</span>
+          <div class="legend-bar-track"><div class="legend-bar-fill legend-bar-fill--mid" style="width:0%" data-w="60"></div></div>
+          <span class="legend-score legend-score--mid">6/10</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-label">About Section</span>
+          <div class="legend-bar-track"><div class="legend-bar-fill legend-bar-fill--mid" style="width:0%" data-w="60"></div></div>
+          <span class="legend-score legend-score--mid">6/10</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-label">Featured</span>
+          <div class="legend-bar-track"><div class="legend-bar-fill legend-bar-fill--low" style="width:0%" data-w="0"></div></div>
+          <span class="legend-score legend-score--low">0/10</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-label">Experience</span>
+          <div class="legend-bar-track"><div class="legend-bar-fill legend-bar-fill--mid" style="width:0%" data-w="70"></div></div>
+          <span class="legend-score legend-score--mid">7/10</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-label">Skills</span>
+          <div class="legend-bar-track"><div class="legend-bar-fill legend-bar-fill--mid" style="width:0%" data-w="50"></div></div>
+          <span class="legend-score legend-score--mid">5/10</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-label">Content Activity</span>
+          <div class="legend-bar-track"><div class="legend-bar-fill legend-bar-fill--mid" style="width:0%" data-w="50"></div></div>
+          <span class="legend-score legend-score--mid">5/10</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-label">Niche Density</span>
+          <div class="legend-bar-track"><div class="legend-bar-fill legend-bar-fill--mid" style="width:0%" data-w="50"></div></div>
+          <span class="legend-score legend-score--mid">5/10</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 score cards -->
+    <div class="score-grid">
+      <!-- Claude: repeat this block × 9, filling real values.
+           data-count = the actual score integer (e.g. 7)
+           data-w on score-bar-fill = N*10 (e.g. 70 for score of 7)
+           data-offset on donut-fill = 100 - (N/10)*100 (e.g. 30 for score 7)
+           All bars start at width:0 and animate to data-w on scroll-reveal. -->
+      <div class="score-card score-card--mid" data-n="7">
+        <p class="score-card__section">01 · Profile Photo</p>
+        <div class="score-card__row">
+          <span class="score-card__n" data-count="7">0</span>
+          <span class="score-card__d">/ 10</span>
+          <svg class="score-donut" viewBox="0 0 36 36" transform="rotate(-90 18 18)">
+            <circle class="donut-track" cx="18" cy="18" r="15.9"/>
+            <circle class="donut-fill donut-fill--mid" cx="18" cy="18" r="15.9"
+              stroke-dashoffset="100" data-offset="30"/>
+          </svg>
+        </div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:0%" data-w="70"></div>
+        </div>
+        <p class="score-card__diag">Professional and credible, but the near-black background blends straight into the banner above it.</p>
+      </div>
+      <div class="score-card score-card--mid" data-n="7">
+        <p class="score-card__section">02 · Banner</p>
+        <div class="score-card__row">
+          <span class="score-card__n" data-count="7">0</span>
+          <span class="score-card__d">/ 10</span>
+          <svg class="score-donut" viewBox="0 0 36 36" transform="rotate(-90 18 18)">
+            <circle class="donut-track" cx="18" cy="18" r="15.9"/>
+            <circle class="donut-fill donut-fill--mid" cx="18" cy="18" r="15.9"
+              stroke-dashoffset="100" data-offset="30"/>
+          </svg>
+        </div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:0%" data-w="70"></div>
+        </div>
+        <p class="score-card__diag">Premium visuals and branding, but no CTA button and no plain-language line about what NIIOMA does.</p>
+      </div>
+      <div class="score-card score-card--mid" data-n="6">
+        <p class="score-card__section">03 · Headline</p>
+        <div class="score-card__row">
+          <span class="score-card__n" data-count="6">0</span>
+          <span class="score-card__d">/ 10</span>
+          <svg class="score-donut" viewBox="0 0 36 36" transform="rotate(-90 18 18)">
+            <circle class="donut-track" cx="18" cy="18" r="15.9"/>
+            <circle class="donut-fill donut-fill--mid" cx="18" cy="18" r="15.9"
+              stroke-dashoffset="100" data-offset="40"/>
+          </svg>
+        </div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:0%" data-w="60"></div>
+        </div>
+        <p class="score-card__diag">Strong credibility signals buried inside abstract "Cognitive OS" language with no named ICP.</p>
+      </div>
+      <div class="score-card score-card--mid" data-n="6">
+        <p class="score-card__section">04 · About Section</p>
+        <div class="score-card__row">
+          <span class="score-card__n" data-count="6">0</span>
+          <span class="score-card__d">/ 10</span>
+          <svg class="score-donut" viewBox="0 0 36 36" transform="rotate(-90 18 18)">
+            <circle class="donut-track" cx="18" cy="18" r="15.9"/>
+            <circle class="donut-fill donut-fill--mid" cx="18" cy="18" r="15.9"
+              stroke-dashoffset="100" data-offset="40"/>
+          </svg>
+        </div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:0%" data-w="60"></div>
+        </div>
+        <p class="score-card__diag">Clear positioning but no scroll-stopping hook, no proof number up front, and zero CTA.</p>
+      </div>
+      <div class="score-card score-card--low" data-n="0">
+        <p class="score-card__section">05 · Featured</p>
+        <div class="score-card__row">
+          <span class="score-card__n" data-count="0">0</span>
+          <span class="score-card__d">/ 10</span>
+          <svg class="score-donut" viewBox="0 0 36 36" transform="rotate(-90 18 18)">
+            <circle class="donut-track" cx="18" cy="18" r="15.9"/>
+            <circle class="donut-fill donut-fill--low" cx="18" cy="18" r="15.9"
+              stroke-dashoffset="100" data-offset="100"/>
+          </svg>
+        </div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:0%" data-w="0"></div>
+        </div>
+        <p class="score-card__diag">Completely empty. The highest-intent visitors have nowhere to click and verify NIIOMA.</p>
+      </div>
+      <div class="score-card score-card--mid" data-n="7">
+        <p class="score-card__section">06 · Experience</p>
+        <div class="score-card__row">
+          <span class="score-card__n" data-count="7">0</span>
+          <span class="score-card__d">/ 10</span>
+          <svg class="score-donut" viewBox="0 0 36 36" transform="rotate(-90 18 18)">
+            <circle class="donut-track" cx="18" cy="18" r="15.9"/>
+            <circle class="donut-fill donut-fill--mid" cx="18" cy="18" r="15.9"
+              stroke-dashoffset="100" data-offset="30"/>
+          </svg>
+        </div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:0%" data-w="70"></div>
+        </div>
+        <p class="score-card__diag">Strong numbers like £1bn and £500m+ are present but written as scope, not delivered results.</p>
+      </div>
+      <div class="score-card score-card--mid" data-n="5">
+        <p class="score-card__section">07 · Skills</p>
+        <div class="score-card__row">
+          <span class="score-card__n" data-count="5">0</span>
+          <span class="score-card__d">/ 10</span>
+          <svg class="score-donut" viewBox="0 0 36 36" transform="rotate(-90 18 18)">
+            <circle class="donut-track" cx="18" cy="18" r="15.9"/>
+            <circle class="donut-fill donut-fill--mid" cx="18" cy="18" r="15.9"
+              stroke-dashoffset="100" data-offset="50"/>
+          </svg>
+        </div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:0%" data-w="50"></div>
+        </div>
+        <p class="score-card__diag">Not visible in the screenshot shared, so search optimisation here is currently unverified.</p>
+      </div>
+      <div class="score-card score-card--mid" data-n="5">
+        <p class="score-card__section">08 · Content Activity</p>
+        <div class="score-card__row">
+          <span class="score-card__n" data-count="5">0</span>
+          <span class="score-card__d">/ 10</span>
+          <svg class="score-donut" viewBox="0 0 36 36" transform="rotate(-90 18 18)">
+            <circle class="donut-track" cx="18" cy="18" r="15.9"/>
+            <circle class="donut-fill donut-fill--mid" cx="18" cy="18" r="15.9"
+              stroke-dashoffset="100" data-offset="50"/>
+          </svg>
+        </div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:0%" data-w="50"></div>
+        </div>
+        <p class="score-card__diag">Good content with light, inconsistent engagement and no throughline back to NIIOMA.</p>
+      </div>
+      <div class="score-card score-card--mid" data-n="5">
+        <p class="score-card__section">09 · Niche Density</p>
+        <div class="score-card__row">
+          <span class="score-card__n" data-count="5">0</span>
+          <span class="score-card__d">/ 10</span>
+          <svg class="score-donut" viewBox="0 0 36 36" transform="rotate(-90 18 18)">
+            <circle class="donut-track" cx="18" cy="18" r="15.9"/>
+            <circle class="donut-fill donut-fill--mid" cx="18" cy="18" r="15.9"
+              stroke-dashoffset="100" data-offset="50"/>
+          </svg>
+        </div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:0%" data-w="50"></div>
+        </div>
+        <p class="score-card__diag">Founder-vision language and enterprise-consulting credibility don't yet reinforce each other.</p>
+      </div>
+    </div>
+
+    <!-- Brand Colour Palette (ONLY if screenshot was provided — omit entirely if no screenshot) -->
+    <div class="palette-card">
+      <div class="palette-card__head">
+        <div class="palette-card__head-text">
+          <h3>Brand Colour Palette</h3>
+          <p>Extracted from your profile visuals. Use these consistently across all brand assets.</p>
+        </div>
+        <span class="palette-card__badge">5 Colours Identified</span>
+      </div>
+      <div class="palette-grid">
+        <!-- Claude: generate one .color-card per extracted colour (3–5 total).
+             Replace: [HEX] with actual hex e.g. #1A2B3C
+                      [ROLE] with Primary / Accent / Background / Text / Secondary
+                      [COLOR_NAME] with descriptive name e.g. "Deep Navy", "Coral Red"
+             The onclick must call: copyHex(this, '[HEX]')  -->
+        <div class="color-card">
+          <div class="color-card__swatch" style="background:#7C5CFC">
+            <div class="color-card__shimmer"></div>
+          </div>
+          <div class="color-card__info">
+            <span class="color-card__role">Primary</span>
+            <span class="color-card__name">Cognitive Violet</span>
+            <div class="color-card__hex-row">
+              <span class="color-card__hex">#7C5CFC</span>
+              <button class="color-copy-btn" onclick="copyHex(this,'#7C5CFC')" title="Copy hex code">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-card__swatch" style="background:#E0468C">
+            <div class="color-card__shimmer"></div>
+          </div>
+          <div class="color-card__info">
+            <span class="color-card__role">Accent</span>
+            <span class="color-card__name">Signal Magenta</span>
+            <div class="color-card__hex-row">
+              <span class="color-card__hex">#E0468C</span>
+              <button class="color-copy-btn" onclick="copyHex(this,'#E0468C')" title="Copy hex code">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-card__swatch" style="background:#2A1B6B">
+            <div class="color-card__shimmer"></div>
+          </div>
+          <div class="color-card__info">
+            <span class="color-card__role">Secondary</span>
+            <span class="color-card__name">Deep Indigo</span>
+            <div class="color-card__hex-row">
+              <span class="color-card__hex">#2A1B6B</span>
+              <button class="color-copy-btn" onclick="copyHex(this,'#2A1B6B')" title="Copy hex code">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-card__swatch" style="background:#0B0B14">
+            <div class="color-card__shimmer"></div>
+          </div>
+          <div class="color-card__info">
+            <span class="color-card__role">Background</span>
+            <span class="color-card__name">Carbon Black</span>
+            <div class="color-card__hex-row">
+              <span class="color-card__hex">#0B0B14</span>
+              <button class="color-copy-btn" onclick="copyHex(this,'#0B0B14')" title="Copy hex code">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-card__swatch" style="background:#FFFFFF">
+            <div class="color-card__shimmer"></div>
+          </div>
+          <div class="color-card__info">
+            <span class="color-card__role">Text</span>
+            <span class="color-card__name">Pure White</span>
+            <div class="color-card__hex-row">
+              <span class="color-card__hex">#FFFFFF</span>
+              <button class="color-copy-btn" onclick="copyHex(this,'#FFFFFF')" title="Copy hex code">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copy toast notification (shared, injected by JS — do not duplicate) -->
+  </div>
+</div>
+
+<!-- ══════════════ TAB: PROBLEMS ══════════════ -->
+<div id="tab-problems" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Critical Issues</span>
+      <h2 class="sec-title">The 3 Things <em>Costing You Leads</em></h2>
+      <p class="sec-desc">Fix these first. Each one is a direct reason the right people aren't reaching out.</p>
+    </div>
+    <div class="problems">
+      <!-- Claude: generate 3 problem-cards. NO bullet points. Full paragraphs only. -->
+      <div class="problem-card">
+        <div class="problem-card__num-col">
+          <span class="problem-n">01</span>
+          <span class="problem-n-label">Issue</span>
+        </div>
+        <div class="problem-card__body">
+          <p class="problem-title">The Featured section is completely empty</p>
+          <p class="problem-text">Right now nothing is pinned at all. A CTO or procurement lead who reads your headline and gets curious about NIIOMA has no link, no case study, no proof to click on. They either Google it themselves or, more often, they just move on to the next profile in their search results.</p>
+          <span class="problem-cost">Lost opportunity: every curious visitor who doesn't bother searching for NIIOMA on their own</span>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card__num-col">
+          <span class="problem-n">02</span>
+          <span class="problem-n-label">Issue</span>
+        </div>
+        <div class="problem-card__body">
+          <p class="problem-title">The headline and About lean on abstract founder language instead of naming who NIIOMA serves</p>
+          <p class="problem-text">“Cognitive OS for the Global Economy” and “cognitive connective tissue” sound visionary, but they don't tell an enterprise technology buyer what changes for them or why it matters this quarter. The exact ICP you need to reach, enterprise CTOs and procurement leaders, scan for buyer language, not philosophy.</p>
+          <span class="problem-cost">Lost opportunity: search visibility among the enterprise leaders actively looking for a faster vendor-matching solution</span>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card__num-col">
+          <span class="problem-n">03</span>
+          <span class="problem-n-label">Issue</span>
+        </div>
+        <div class="problem-card__body">
+          <p class="problem-title">The Experience section buries strong results inside task descriptions</p>
+          <p class="problem-text">Numbers like £1bn and £500m+ are genuinely impressive proof points, but they're written as scope statements (“executive owner for technology strategy across a £1bn account”) rather than outcomes. A prospect deciding whether to trust NIIOMA with their own technology decisions has to dig for evidence that's already sitting right there.</p>
+          <span class="problem-cost">Lost opportunity: instant credibility with enterprise buyers evaluating whether you've solved this problem before</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: PROFILE PHOTO ══════════════ -->
+<div id="tab-photo" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Section 01</span>
+      <h2 class="sec-title">Profile <em>Photo</em></h2>
+    </div>
+    <div class="audit-cards">
+      <div class="audit-card">
+        <div class="audit-card__head">
+          <div class="audit-card__head-left">
+            <span class="audit-card__idx">01</span>
+            <span class="audit-card__name">Profile Photo</span>
+          </div>
+          <span class="audit-card__score-badge">7 / 10</span>
+        </div>
+        <div class="audit-card__body">
+          <div class="block block--current">
+            <p class="block__label">Current State</p>
+            <p class="block__text">A studio-style headshot in a dark charcoal jacket and glasses, soft directional lighting, a neutral near-black background, and a composed, confident expression cropped tightly to the shoulders.</p>
+          </div>
+          <div class="block block--diag">
+            <p class="block__label">Diagnosis</p>
+            <p class="block__text">Technically clean and credible, this photo reads as "consultant" to an enterprise audience, which suits your background. The problem is the near-black background bleeding straight into the dark banner above it, which flattens the visual hierarchy and makes the photo blend into the page instead of standing out the way a founder's photo should on a profile representing a category-defining company.</p>
+          </div>
+          <div class="block block--rewrite">
+            <p class="block__label">Recommendation</p>
+            <p class="block__text">Reshoot or recrop against a lighter, warmer background, mid-grey or soft daylight rather than near-black. Keep the same suit and glasses combination since it already reads as credible, but angle the body slightly off-centre with a relaxed half-smile rather than a closed, neutral expression. Founders who raise the warmth of their headshot by even one notch consistently get more profile clicks from cold search.</p>
+          </div>
+          <div class="block block--tip">
+            <p class="block__label">Quick Win</p>
+            <p class="block__text">Crop tighter so the shoulders fill more of the frame, and brighten the existing photo by 10 to 15% in Canva or Photos. That alone separates the face from the dark banner without a new shoot.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: BANNER ══════════════ -->
+<div id="tab-banner" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Section 02</span>
+      <h2 class="sec-title">Banner / <em>Cover Image</em></h2>
+    </div>
+    <div class="audit-cards">
+      <div class="audit-card">
+        <div class="audit-card__head">
+          <div class="audit-card__head-left">
+            <span class="audit-card__idx">02</span>
+            <span class="audit-card__name">Banner</span>
+          </div>
+          <span class="audit-card__score-badge">7 / 10</span>
+        </div>
+        <div class="audit-card__body">
+          <div class="block block--current">
+            <p class="block__label">Current State</p>
+            <p class="block__text">A branded violet-to-magenta gradient with an AI-generated portrait, the NIIOMA logo top left, and the tagline "A better life by maximising the economic opportunity for everyone." No button, link or directional cue anywhere on it.</p>
+          </div>
+          <div class="block block--diag">
+            <p class="block__label">Diagnosis</p>
+            <p class="block__text">The visual quality is genuinely premium and on brand, so this scores well above average. It fails the substance half of the 3-second test though. The tagline is evocative but abstract, a stranger never learns that NIIOMA connects enterprises with technology vendors, and there's no button or arrow pointing anywhere, so the single strongest piece of real estate on the profile currently generates zero clicks.</p>
+          </div>
+          <div class="block block--rewrite">
+            <p class="block__label">Rewritten Banner Copy</p>
+            <p class="block__text">Headline: "The AI network for enterprise technology partnerships." Supporting line: "Connecting enterprises, vendors and talent in days, not quarters." Social proof: "Built on £1bn+ in enterprise technology transformation." CTA button: "Visit niioma.com."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banner Design Brief -->
+    <div style="margin-top: 24px;">
+      <div class="sec-header" style="padding-top: 0;">
+        <span class="sec-eyebrow">Design Brief</span>
+        <h2 class="sec-title" style="font-size: 24px;">Canva <em>Build Guide</em></h2>
+      </div>
+      <div class="banner-brief">
+        <div class="banner-brief__top">
+          <div class="banner-brief__top-text">
+            <h3>Banner Specification</h3>
+            <p>1584 × 396 px · PNG export · Safe zone: centre 1200 × 300 px</p>
+          </div>
+          <span class="banner-brief__tool">Build in Canva — Free</span>
+        </div>
+        <div class="banner-brief__rows">
+          <div class="banner-brief__row">
+            <span class="banner-brief__key">Background</span>
+            <span class="banner-brief__val">Keep the existing violet-to-magenta gradient and AI portrait, it is already premium and on brand</span>
+          </div>
+          <div class="banner-brief__row">
+            <span class="banner-brief__key">Primary Headline</span>
+            <span class="banner-brief__val">The AI network for enterprise technology partnerships</span>
+          </div>
+          <div class="banner-brief__row">
+            <span class="banner-brief__key">Supporting Line</span>
+            <span class="banner-brief__val">Connecting enterprises, vendors and talent in days, not quarters</span>
+          </div>
+          <div class="banner-brief__row">
+            <span class="banner-brief__key">Social Proof</span>
+            <span class="banner-brief__val">Built on £1bn+ in enterprise technology transformation</span>
+          </div>
+          <div class="banner-brief__row">
+            <span class="banner-brief__key">CTA Element</span>
+            <span class="banner-brief__val">"Visit niioma.com" button, bottom right, white fill on the existing violet</span>
+          </div>
+          <div class="banner-brief__row">
+            <span class="banner-brief__key">Typography</span>
+            <span class="banner-brief__val">Inter or a similar geometric sans, bold 700+ for the headline, regular weight for the supporting line</span>
+          </div>
+          <div class="banner-brief__row">
+            <span class="banner-brief__key">Remove</span>
+            <span class="banner-brief__val">Nothing structurally. Add the missing headline, supporting line and CTA text over the existing artwork</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: HEADLINE ══════════════ -->
+<div id="tab-headline" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Section 03</span>
+      <h2 class="sec-title">Your <em>Headline</em></h2>
+    </div>
+    <div class="audit-cards">
+      <div class="audit-card">
+        <div class="audit-card__head">
+          <div class="audit-card__head-left">
+            <span class="audit-card__idx">03</span>
+            <span class="audit-card__name">Headline</span>
+          </div>
+          <span class="audit-card__score-badge">6 / 10</span>
+        </div>
+        <div class="audit-card__body">
+          <div class="block block--current">
+            <p class="block__label">Current Headline</p>
+            <p class="block__text">Building the Cognitive OS for the Global Economy | Founder @ NIIOMA | AI for Good</p>
+          </div>
+          <div class="block block--diag">
+            <p class="block__label">Diagnosis</p>
+            <p class="block__text">Three pipe-separated segments split attention across vision, role and mission instead of making one sharp claim. "Cognitive OS" is internal founder language, not something an enterprise CTO searches for, and nothing in the line names who NIIOMA actually serves or what changes for them this quarter.</p>
+          </div>
+          <div class="block block--rewrite">
+            <p class="block__label">3 Headline Options — Pick Your Favourite</p>
+            <p class="block__text">Option A (Direct) — I help enterprises and technology vendors find the right partnerships in days, not procurement cycles, through NIIOMA's AI-orchestrated network
+
+Option B (Pain-focused) — Vendor selection still takes months while the AI landscape moves in weeks. NIIOMA closes that gap for enterprise technology teams
+
+Option C (Differentiator) — Built £1bn+ technology transformations at Gartner and World Wide Technology. Now building the AI network that connects enterprises to the right partners instantly</p>
+          </div>
+          <div class="block block--tip">
+            <p class="block__label">Why This Works</p>
+            <p class="block__text">All three name the ICP directly (enterprises, vendors, technology teams), lead with an outcome instead of a job title, and trade abstract founder language for the buyer's own words. Option C also pulls your strongest proof points to the front, since "£1bn+" and named firms like Gartner do more work in a search result than "AI for Good" ever will.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: ABOUT ══════════════ -->
+<div id="tab-about" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Section 04</span>
+      <h2 class="sec-title">About <em>Section</em></h2>
+    </div>
+    <div class="audit-cards">
+      <div class="audit-card">
+        <div class="audit-card__head">
+          <div class="audit-card__head-left">
+            <span class="audit-card__idx">04</span>
+            <span class="audit-card__name">About Section</span>
+          </div>
+          <span class="audit-card__score-badge">6 / 10</span>
+        </div>
+        <div class="audit-card__body">
+          <div class="block block--current">
+            <p class="block__label">Current About</p>
+            <p class="block__text">"I'm a technology and business leader focused on redefining how technology is delivered at scale, with a strong belief in AI as a force for good. I've led multi-million-pound transformation programmes, working with large organisations and senior executives."</p>
+          </div>
+          <div class="block block--diag">
+            <p class="block__label">Diagnosis</p>
+            <p class="block__text">There's no hook, the opening line describes Azam rather than naming a problem the reader has, and the section ends mid-thought with no CTA at all. The £500m+ and £1bn proof points that exist in the Experience section never make it up here, where a first-time visitor actually needs to see them.</p>
+          </div>
+          <div class="block block--rewrite">
+            <p class="block__label">Rewritten About — Paste Into LinkedIn</p>
+            <p class="block__text">Enterprises don't lack technology vendors. They lack a fast, trustworthy way to find the right one.
+
+Procurement cycles for major technology partnerships still take months of RFPs, shortlists and back-channel reference calls, while the AI landscape moves faster than any committee can evaluate it. By the time a decision gets made, the technology has often already moved on.
+
+I started NIIOMA to close that gap. It's an AI-orchestrated network that connects enterprises, technology vendors and talent directly, so the right partnerships form in days instead of quarters.
+
+This is a problem I've sat inside for over a decade. As Consulting Director at Gartner I advised C-suite leaders on technology strategy across cloud, data, AI and governance. Before that I owned the technology strategy for a £1bn Tier-1 telecom account at World Wide Technology, and led 5G and AIOps transformation programmes worth £500m+ in client-facing leadership roles.
+
+NIIOMA is the operating layer underneath those relationships. It maps enterprise needs against vendor and talent capability in real time, so the people making £100m+ technology decisions can move at the speed the AI era actually demands.
+
+Visit the NIIOMA website to see how the network works, and where it can plug into your next technology decision.</p>
+          </div>
+          <div class="block block--tip">
+            <p class="block__label">Copy Formula Used</p>
+            <p class="block__text">Hook that stops the scroll. Pain mirror that makes the reader think "this person gets me." Bridge that positions you as the answer. Proof that makes it credible. CTA that creates one clear next step.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: FEATURED ══════════════ -->
+<div id="tab-featured" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Section 05</span>
+      <h2 class="sec-title">Featured <em>Section</em></h2>
+    </div>
+    <div class="audit-cards">
+      <div class="audit-card">
+        <div class="audit-card__head">
+          <div class="audit-card__head-left">
+            <span class="audit-card__idx">05</span>
+            <span class="audit-card__name">Featured</span>
+          </div>
+          <span class="audit-card__score-badge">0 / 10</span>
+        </div>
+        <div class="audit-card__body">
+          <div class="block block--current">
+            <p class="block__label">Current State</p>
+            <p class="block__text">No Featured section is visible on the profile at all. Nothing is pinned between About and the Activity feed.</p>
+          </div>
+          <div class="block block--diag">
+            <p class="block__label">Diagnosis</p>
+            <p class="block__text">This is the single biggest leak on the entire profile. Every other section is doing work to make a visitor curious about NIIOMA, and then that visitor hits a dead end with nothing to click. Featured is the only section LinkedIn lets you fill with external links, and it's currently worth zero.</p>
+          </div>
+          <div class="block block--rewrite">
+            <p class="block__label">What to Pin — In This Order</p>
+            <p class="block__text">Slot 1: "Visit the NIIOMA Website" — link to niioma.com, this is your primary conversion goal
+
+Slot 2: "Inside NIIOMA's AI Network" — link to your best-performing post or a short case study explaining how the matching system works
+
+Slot 3: "Book a Conversation" — link to a calendar booking page if one exists, or your LinkedIn post that generated the most enterprise engagement</p>
+          </div>
+          <div class="block block--tip">
+            <p class="block__label">How to Add in 5 Minutes</p>
+            <p class="block__text">Edit Profile, scroll to Featured, click the plus icon, choose Link or Post, paste the URL, and replace the auto-generated title with the exact copy above.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: EXPERIENCE ══════════════ -->
+<div id="tab-experience" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Section 06</span>
+      <h2 class="sec-title">Experience <em>Section</em></h2>
+    </div>
+    <div class="audit-cards">
+      <div class="audit-card">
+        <div class="audit-card__head">
+          <div class="audit-card__head-left">
+            <span class="audit-card__idx">06</span>
+            <span class="audit-card__name">Experience</span>
+          </div>
+          <span class="audit-card__score-badge">7 / 10</span>
+        </div>
+        <div class="audit-card__body">
+          <div class="block block--current">
+            <p class="block__label">Current State</p>
+            <p class="block__text">Five roles since 2017, from Comarch through B-Yond, World Wide Technology and Gartner to founding NIIOMA. Descriptions are present for each but truncated, mixing task language with genuinely strong, buried numbers (£500m+, £1bn, 5G/AIOps).</p>
+          </div>
+          <div class="block block--diag">
+            <p class="block__label">Diagnosis</p>
+            <p class="block__text">"Executive owner for technology strategy across a £1bn account" tells a reader what you were responsible for, not what changed because of you. A prospect deciding whether to trust NIIOMA with their own technology decisions has to dig for proof you've delivered outcomes at this level before, instead of having it handed to them.</p>
+          </div>
+          <div class="block block--rewrite">
+            <p class="block__label">Rewritten Top Role Description (Founder, NIIOMA)</p>
+            <p class="block__text">Enterprise technology leaders kept telling me the same thing: the right vendor or AI partner existed somewhere, but finding them took months of RFPs, reference calls and guesswork while the technology itself kept moving. I'd seen that gap from every angle, advising C-suite leaders at Gartner, owning a £1bn Tier-1 telecom account at World Wide Technology, and running 5G and AIOps transformation programmes worth £500m+ in client-facing roles before that. So in January 2025 I founded NIIOMA to close it. I built an AI-orchestrated network that maps enterprise needs directly against vendor and talent capability, replacing procurement cycles that used to take quarters with matches that take days. I assembled the founding team, shaped the product architecture from the ground up, and set the company's direction as the operating layer for how enterprises, vendors and talent connect in the AI era. Eighteen months in, NIIOMA is positioned as the connective infrastructure underneath the next wave of enterprise technology partnerships, built by someone who spent over a decade sitting inside the exact decisions it now accelerates.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: SKILLS ══════════════ -->
+<div id="tab-skills" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Section 07</span>
+      <h2 class="sec-title">Skills <em>Section</em></h2>
+    </div>
+    <div class="audit-cards">
+      <div class="audit-card">
+        <div class="audit-card__head">
+          <div class="audit-card__head-left">
+            <span class="audit-card__idx">07</span>
+            <span class="audit-card__name">Skills</span>
+          </div>
+          <span class="audit-card__score-badge">5 / 10</span>
+        </div>
+        <div class="audit-card__body">
+          <div class="block block--current">
+            <p class="block__label">Current Top Skills</p>
+            <p class="block__text">Not visible in the screenshot shared, the Skills section wasn't captured in that scroll.</p>
+          </div>
+          <div class="block block--diag">
+            <p class="block__label">Diagnosis</p>
+            <p class="block__text">Without visibility into the current list, scoring stays conservative here. What's certain is that generic terms like "Leadership" or "Strategy" do nothing for search visibility against an ICP of enterprise CTOs and procurement leads, who search far more specific terms when looking for a partner like NIIOMA.</p>
+          </div>
+          <div class="block block--rewrite">
+            <p class="block__label">Recommended Top 3 Skills</p>
+            <p class="block__text">Skill 1: Enterprise AI Strategy — the highest-volume search term among CTOs and procurement leads evaluating partners like NIIOMA
+
+Skill 2: Technology Vendor Ecosystem — names the exact problem NIIOMA solves, so it surfaces in the right searches
+
+Skill 3: Large-Scale Digital Transformation — a broad discovery term that connects your Gartner, WWT and Comarch credibility to the NIIOMA pitch
+
+How to reorder: Edit Profile, Skills section, drag the three above to the top positions. Then ask 5 to 10 connections to endorse each one this week.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: ACTIVITY ══════════════ -->
+<div id="tab-activity" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Section 08</span>
+      <h2 class="sec-title">Content <em>Activity</em></h2>
+    </div>
+    <div class="audit-cards">
+      <div class="audit-card">
+        <div class="audit-card__head">
+          <div class="audit-card__head-left">
+            <span class="audit-card__idx">08</span>
+            <span class="audit-card__name">Content Activity</span>
+          </div>
+          <span class="audit-card__score-badge">5 / 10</span>
+        </div>
+        <div class="audit-card__body">
+          <div class="block block--current">
+            <p class="block__label">Current State</p>
+            <p class="block__text">6,369 followers. Recent posts include a personal story about working with major airlines on IT digital transformation, and a repost of McKinsey's 2026 Global B2B Pulse report. Engagement is light, single to low double-digit reactions on both.</p>
+          </div>
+          <div class="block block--diag">
+            <p class="block__label">Diagnosis</p>
+            <p class="block__text">The content itself is solid, genuine experience plus credible third-party research, but there's no consistent throughline tying every post back to NIIOMA's specific value proposition. A CTO who sees one post won't necessarily see two more that build the same case, and the low engagement numbers suggest reach within your existing network rather than into the enterprise ICP NIIOMA needs.</p>
+          </div>
+          <div class="block block--rewrite">
+            <p class="block__label">30-Day Content Rhythm</p>
+            <p class="block__text">Post twice a week minimum, alternating two angles. The first is proof: short, specific stories from inside £500m+ and £1bn technology transformations, written as a lesson the reader can apply rather than a credential to admire. The second is the NIIOMA thesis: practical breakdowns of why enterprise vendor selection is broken today and what NIIOMA changes about it, written in plain buyer language instead of "Cognitive OS" terminology. Close every post with a soft prompt, either a question that invites comments from enterprise technology leaders or a one-line mention of what NIIOMA is building, never a hard pitch.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: NICHE DENSITY ══════════════ -->
+<div id="tab-niche" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Section 09</span>
+      <h2 class="sec-title">Niche <em>Density</em></h2>
+    </div>
+    <div class="audit-cards">
+      <div class="audit-card">
+        <div class="audit-card__head">
+          <div class="audit-card__head-left">
+            <span class="audit-card__idx">09</span>
+            <span class="audit-card__name">Niche Density</span>
+          </div>
+          <span class="audit-card__score-badge">5 / 10</span>
+        </div>
+        <div class="audit-card__body">
+          <div class="block block--current">
+            <p class="block__label">Current State</p>
+            <p class="block__text">The headline and About speak in founder-vision language ("Cognitive OS", "cognitive connective tissue") while the Experience section speaks in enterprise consulting language (Gartner, WWT, £1bn account). The two halves don't yet reinforce each other into one clear story.</p>
+          </div>
+          <div class="block block--diag">
+            <p class="block__label">Diagnosis</p>
+            <p class="block__text">A cold visitor sees credible enterprise consulting credentials sitting next to an abstract, almost philosophical company pitch, and has to do the work of connecting the two themselves. That gap is exactly what's costing search relevance and clarity, because LinkedIn and human readers both reward profiles where every section reinforces the same specific claim.</p>
+          </div>
+          <div class="block block--rewrite">
+            <p class="block__label">Niche Consistency Checklist</p>
+            <p class="block__text">Replace "Cognitive OS" and "cognitive connective tissue" everywhere they appear, in the headline, About and banner, with concrete buyer language about connecting enterprises to the right technology vendors and talent faster. Carry the £1bn and £500m+ proof points from the Experience section up into the About section, so the vision and the credibility sit in the same place instead of separate sections. Make sure every piece of content posted going forward ties back to the same enterprise vendor-matching thesis, so a visitor reading three posts in a row sees one consistent argument, not three different ideas.</p>
+          </div>
+          <div class="block block--tip">
+            <p class="block__label">The 5-Second Test</p>
+            <p class="block__text">Show your profile to someone who doesn't know you. Ask them who it's for and what you do. If they can't answer both in 5 seconds, the niche density work isn't done yet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: NEXT STEPS ══════════════ -->
+<div id="tab-nextsteps" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">Implementation Plan</span>
+      <h2 class="sec-title">What to <em>Fix First</em></h2>
+      <p class="sec-desc">Priority order based on impact. Start at the top and work down.</p>
+    </div>
+
+    <div class="next-steps">
+      <!-- Claude: generate 5–7 step-cards. Time estimates are real, not generic. -->
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div>
+          <p class="step-title">Pin the NIIOMA website to Featured</p>
+          <p class="step-desc">Edit Profile, scroll to Featured, add niioma.com as Slot 1 with the title "Visit the NIIOMA Website." This single change closes the biggest leak on the profile.</p>
+        </div>
+        <span class="step-time">5 minutes</span>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div>
+          <p class="step-title">Swap in the new headline</p>
+          <p class="step-desc">Paste Option A or Option C from the Headline tab. Both name the ICP and the outcome in plain language instead of "Cognitive OS."</p>
+        </div>
+        <span class="step-time">10 minutes</span>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div>
+          <p class="step-title">Replace the About section</p>
+          <p class="step-desc">Paste the rewritten About section from the About tab. It opens with a hook, carries your strongest proof points up front, and ends with a CTA to the NIIOMA website.</p>
+        </div>
+        <span class="step-time">20 minutes</span>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div>
+          <p class="step-title">Update the banner copy</p>
+          <p class="step-desc">Add the new headline, supporting line and CTA button to the existing artwork in Canva using the Banner tab brief. Keep the visual, just add the missing text layer.</p>
+        </div>
+        <span class="step-time">30 to 45 minutes</span>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <div>
+          <p class="step-title">Rewrite the Founder role in Experience</p>
+          <p class="step-desc">Paste the CCAR-format rewrite from the Experience tab over your current Founder, NIIOMA description.</p>
+        </div>
+        <span class="step-time">15 minutes</span>
+      </div>
+      <div class="step-card">
+        <div class="step-num">6</div>
+        <div>
+          <p class="step-title">Set the top 3 skills and start the posting rhythm</p>
+          <p class="step-desc">Reorder Skills using the three recommended terms, then begin the twice-weekly content rhythm from the Activity tab.</p>
+        </div>
+        <span class="step-time">Ongoing, next 2 weeks</span>
+      </div>
+    </div>
+
+    <!-- LinkedAI System CTA -->
+    <div class="wcta">
+      <div class="wcta-inner-wrap">
+        <div class="wcta-glow"></div>
+        <div class="wcta-glow2"></div>
+        <div class="wcta-content">
+          <div class="wcta-live-badge"><span class="live-dot"></span>LinkedAI System &nbsp;&middot;&nbsp; by Growlioo</div>
+          <h2 class="wcta-title">Still posting and<br>waiting for leads?</h2>
+          <p class="wcta-desc">We built an AI system that runs your LinkedIn for you — content, comments, outreach — so you get consistent visibility and inbound leads without spending 3 hours a day on the platform.</p>
+          <div class="wcta-pillars">
+            <span class="wcta-pillar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Profile &amp; Positioning</span>
+            <span class="wcta-pillar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Content &amp; Design</span>
+            <span class="wcta-pillar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Outreach &amp; Leads</span>
+          </div>
+          <a href="https://linkedai.growlioo.com/" target="_blank" rel="noopener" class="wcta-btn">
+            Install the LinkedIn AI System
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <p class="wcta-urgency">linkedai.growlioo.com &nbsp;&middot;&nbsp; Built by Malik Muzamil</p>
+          <div class="wcta-spots">Runs 24/7 &nbsp;&middot;&nbsp; No 3-hour daily grind required</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ MASTERCLASS TAB ══════════════ -->
+<div id="tab-masterclass" class="tab-panel">
+  <div class="page">
+    <div class="sec-header">
+      <span class="sec-eyebrow">LinkedIn Education</span>
+      <h2 class="sec-title">The LinkedIn <em>Masterclass</em></h2>
+      <p class="sec-desc">What the top 1% of LinkedIn creators actually know — backed by research from 1.8 million posts.</p>
+    </div>
+
+    <div class="mc-intro">
+      <p class="mc-intro__eyebrow">Research Foundation</p>
+      <h3 class="mc-intro__title">What 1.8 Million LinkedIn Posts Actually Teach Us</h3>
+      <p class="mc-intro__body">The insights below are drawn from Growlioo's analysis of LinkedIn performance data covering over 1.8 million posts. The data covers how the algorithm distributes content, how profiles convert visitors, and what actually drives inbound leads in 2025 and 2026. The platform no longer rewards volume or virality. It rewards relevance, expertise, and genuine engagement. Every lesson here is built on that data. This is not generic advice. This is what Malik Muzamil built Growlioo around — what actually works right now.</p>
+      <span class="mc-source"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><strong>Growlioo Research</strong> &nbsp;&middot;&nbsp; LinkedIn Performance Analysis 2025/2026 &nbsp;&middot;&nbsp; by Malik Muzamil</span>
+    </div>
+
+    <!-- LESSON 1: THE ALGORITHM -->
+    <div class="mc-lesson open">
+      <div class="mc-lesson__header" onclick="toggleLesson(this)">
+        <div class="mc-lesson__num">01</div>
+        <span class="mc-lesson__title">How the LinkedIn Algorithm Actually Works in 2026</span>
+        <span class="mc-lesson__tag">Foundation</span>
+        <svg class="mc-lesson__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mc-lesson__body">
+        <div class="mc-stat-row">
+          <div class="mc-stat"><span class="mc-stat__num">50%</span><span class="mc-stat__label">drop in organic reach since 2024</span></div>
+          <div class="mc-stat"><span class="mc-stat__num">1.8M</span><span class="mc-stat__label">posts analyzed in Growlioo's 2025 LinkedIn research</span></div>
+          <div class="mc-stat"><span class="mc-stat__num">80%</span><span class="mc-stat__label">chance your next post appears if someone saves yours</span></div>
+        </div>
+        <p>LinkedIn's algorithm now uses a four-stage distribution process. When you post, LinkedIn's AI immediately classifies the content as spam, low-quality, or high-quality based on the first 60 minutes of engagement. If your post gets strong, relevant comments from people in your niche during that first hour, it expands. If it gets silence or hollow reactions from outside your niche, it stops.</p>
+        <p>The platform no longer rewards going viral. Daniel Roth, LinkedIn's chief editor, confirmed the shift: the goal is now to reach more relevant audiences, not larger audiences. That means 500 views from founders in your exact ICP is worth more than 5,000 views from random users.</p>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>First 60 minutes are everything.</strong> Post when your audience is active (Tuesday to Thursday, 9 to 11 AM local time). Engage on at least 5 posts before and after you publish to warm up the algorithm.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Comments over 15 words carry 2.5x more weight</strong> than short reactions. Meaningful comments from your ICP tell LinkedIn this content belongs in professional feeds, not just casual ones.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Saves are the strongest signal.</strong> In late 2025, LinkedIn added Saves to post analytics. When someone saves your post, the next post from that author has an 80% chance of appearing in their feed. Frameworks, checklists, and practical breakdowns get saved more than inspiration.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Native content wins.</strong> LinkedIn actively penalizes external links in the main post body. If you must share a link, put it in the first comment. Posts without links consistently outperform posts with links.</div></div>
+      </div>
+    </div>
+
+    <!-- LESSON 2: PROFILE AS LEAD MACHINE -->
+    <div class="mc-lesson">
+      <div class="mc-lesson__header" onclick="toggleLesson(this)">
+        <div class="mc-lesson__num">02</div>
+        <span class="mc-lesson__title">Your Profile Is a 24/7 Lead Machine — Here Is How to Build One</span>
+        <span class="mc-lesson__tag">Profile</span>
+        <svg class="mc-lesson__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mc-lesson__body">
+        <div class="mc-stat-row">
+          <div class="mc-stat"><span class="mc-stat__num">21x</span><span class="mc-stat__label">more profile views with a professional photo</span></div>
+          <div class="mc-stat"><span class="mc-stat__num">40x</span><span class="mc-stat__label">more search appearances at All-Star profile status</span></div>
+          <div class="mc-stat"><span class="mc-stat__num">3–6s</span><span class="mc-stat__label">decision window — visitor decides whether to connect</span></div>
+        </div>
+        <p>Most people treat their LinkedIn profile as a CV. The top 1% treat it as a sales page. Every section has a job to do: the photo builds trust in the first second, the banner communicates positioning at a glance, the headline tells the ICP exactly why they should keep reading, and the About section closes them on taking action. When all four sections work together, the profile generates inbound DMs without you doing anything.</p>
+        <p>LinkedIn's search algorithm weights your headline at 5x the importance of other fields. That one line determines whether you show up when your ideal client searches for what you do. Profiles using 100 or more characters in the headline consistently receive more search impressions than shorter ones.</p>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Headline formula that converts:</strong> Who you help + Outcome you create + Credibility signal. Use all 220 characters. Use buyer language, not job titles. Example: "I help B2B founders turn LinkedIn into a consistent inbound channel | Built systems for 200+ clients"</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>About section structure that closes:</strong> Hook (1 line, under 12 words, challenges a belief) → Mirror (describe their pain in their language) → Bridge (introduce yourself as the solution) → Proof (specific result or number) → CTA (one DM keyword or link). No bullet points. No "I am passionate about."</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Featured section is your conversion engine.</strong> Slot 1: your best lead magnet with an outcome-focused title. Slot 2: your highest-engagement post or a client case study. Slot 3: a booking link with a specific promise. The best-converting Featured sections Growlioo has audited generate consistent inbound DMs without any outreach — purely from profile visitors seeing the right asset in the right slot.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Refresh signals matter.</strong> LinkedIn gives a temporary ranking boost to recently updated profiles. Update your headline or About section every 3 to 6 months, even slightly, to trigger the freshness signal.</div></div>
+      </div>
+    </div>
+
+    <!-- LESSON 3: CONTENT FORMATS -->
+    <div class="mc-lesson">
+      <div class="mc-lesson__header" onclick="toggleLesson(this)">
+        <div class="mc-lesson__num">03</div>
+        <span class="mc-lesson__title">Which Content Formats Actually Win in 2025 and 2026</span>
+        <span class="mc-lesson__tag">Content</span>
+        <svg class="mc-lesson__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mc-lesson__body">
+        <div class="mc-stat-row">
+          <div class="mc-stat"><span class="mc-stat__num">+69%</span><span class="mc-stat__label">native video performance boost (Growlioo LinkedIn research 2025)</span></div>
+          <div class="mc-stat"><span class="mc-stat__num">2.4x</span><span class="mc-stat__label">better reach for infographics vs average images</span></div>
+          <div class="mc-stat"><span class="mc-stat__num">9</span><span class="mc-stat__label">slides is the optimal carousel length for engagement</span></div>
+        </div>
+        <p>Not all content formats perform equally. Growlioo's analysis of 1.8 million posts identified clear winners and losers. Native video now leads, especially vertical format under 60 seconds where your face or logo appears in the first four seconds. Document posts (carousels) drive extended dwell time and consistent saves. Text-only posts saw an 18% engagement drop. Company page text posts now have a multiplier of 0.28 — essentially invisible.</p>
+        <p>Personal profiles outperform company pages by a significant margin. Company page content now reaches only a fraction of followers organically. The brands seeing results in 2026 invest in personal profiles and employee advocacy instead. Employee advocacy drives 30% of total company engagement while only 3% of employees are actually sharing content.</p>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Post length is binary.</strong> Either keep posts very short (1 to 5 sentences) or go long (20 or more sentences with a story arc). Medium-length posts underperform. Long-form posts with structured narratives generate the most comments and saves.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Photos of people outperform stock images by 50%.</strong> Your face in the post, even as a casual selfie with good lighting, consistently beats polished branded graphics without a person in them.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Hashtags have zero impact on reach.</strong> Research from 2025 confirms hashtags no longer affect distribution. Use 3 to 5 niche-specific ones for categorization only, not as a reach tactic. Never use more than 5 as that triggers spam filters.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Content that gets saved beats content that gets liked.</strong> Frameworks, checklists, named systems, and practical breakdowns get saved and bookmarked. Inspirational quotes and generic advice get liked and forgotten. Design every post to be something worth keeping.</div></div>
+      </div>
+    </div>
+
+    <!-- LESSON 4: INBOUND LEADS -->
+    <div class="mc-lesson">
+      <div class="mc-lesson__header" onclick="toggleLesson(this)">
+        <div class="mc-lesson__num">04</div>
+        <span class="mc-lesson__title">How to Convert LinkedIn Visibility Into Actual Leads</span>
+        <span class="mc-lesson__tag">Lead Gen</span>
+        <svg class="mc-lesson__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mc-lesson__body">
+        <div class="mc-stat-row">
+          <div class="mc-stat"><span class="mc-stat__num">4 in 5</span><span class="mc-stat__label">B2B leads from social media come from LinkedIn</span></div>
+          <div class="mc-stat"><span class="mc-stat__num">300%</span><span class="mc-stat__label">increase in inbound leads when replacing cold DMs with contextual comments</span></div>
+          <div class="mc-stat"><span class="mc-stat__num">60-80%</span><span class="mc-stat__label">connection acceptance rate with a warm comment-first approach</span></div>
+        </div>
+        <p>Visibility does not automatically become leads. The conversion chain works like this: strong profile attracts profile views, profile views lead to connection requests, connections read your content, content builds trust, trust generates DMs, DMs become calls. Every section of this chain can leak. The audit you just read identifies exactly where your chain is breaking.</p>
+        <p>Research from 2026 shows that replacing 100 cold DMs with 30 contextual comments — engaging meaningfully on posts your ideal clients write — generates 3x more inbound leads. Prospects visit your profile after seeing insightful comments in their feed. Your profile closes them. The DM is no longer necessary.</p>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>The comment-first system.</strong> Spend 15 minutes before and after each post commenting meaningfully on content from people who serve your ideal client. Comments that go beyond 10 words, feel human, and add a perspective get noticed by the algorithm and attract profile visits from exactly the right people.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>When someone engages consistently, that is a warm lead.</strong> Send a personalized DM thanking them for the engagement, referencing something specific from their profile or recent post. Never pitch in the first message. The goal is to start a conversation, not close a deal.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Post content that pre-sells.</strong> The best LinkedIn content answers the question your ideal client is Googling right now. When your post solves a real problem they have this week, the people who read it are already pre-sold by the time they hit your profile. Your profile just needs to close them.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>Track the right metrics.</strong> Inbound DMs, profile views from your ICP, and connection requests from decision-makers matter. Likes and impressions from outside your niche do not. If you are gaining 50 followers who match your ideal client, that is more valuable than 5,000 random followers.</div></div>
+      </div>
+    </div>
+
+    <!-- LESSON 5: THE PROGRESS LOOP -->
+    <div class="mc-lesson">
+      <div class="mc-lesson__header" onclick="toggleLesson(this)">
+        <div class="mc-lesson__num">05</div>
+        <span class="mc-lesson__title">The Progress Loop — How to Track Whether Your Profile Is Working</span>
+        <span class="mc-lesson__tag">System</span>
+        <svg class="mc-lesson__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="mc-lesson__body">
+        <p>A profile audit is not a one-time event. It is the start of a loop. You update the sections with the lowest scores, run your profile for 4 to 6 weeks, then come back and run the audit again. The second audit shows exactly what moved the needle and what still needs work. That comparison is more valuable than any single audit because it tells you which changes actually correlated with results in the real world.</p>
+        <p>Your audit report contains a JSON data block at the bottom of the HTML file. When you come back for a V2 audit, you paste that JSON block along with your updated profile screenshot. The system loads your V1 scores, runs the full V2 audit, and generates a before/after comparison showing the delta on every section, what moved the needle, and what still needs attention.</p>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>How to run a Progress Audit.</strong> Open this HTML report file. Scroll to the very bottom. Copy the JSON block inside the &lt;script id="audit-data"&gt; tag. Paste it into the chat with your new LinkedIn profile screenshot. You will receive a full V2 audit with a before/after comparison built into the report.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>When to come back.</strong> Run the progress audit 4 to 6 weeks after implementing the highest-priority changes from this report. That gives the algorithm time to register the profile changes and enough content cycles to show whether positioning shifts are resonating.</div></div>
+        <div class="mc-rule"><div class="mc-rule__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="mc-rule__text"><strong>What to measure between audits.</strong> Track weekly: profile views, search appearances, connection requests from ideal clients, inbound DMs. If profile views go up after updating your headline, that section change worked. If they stay flat, it needs another iteration.</div></div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA strip -->
+    <div class="mc-cta-strip">
+      <div class="mc-cta-strip__text">
+        <h4>Want an AI system that does all of this for you?</h4>
+        <p>Content, comments, outreach — running on autopilot while you focus on your actual work.</p>
+      </div>
+      <a href="https://linkedai.growlioo.com/" target="_blank" rel="noopener" class="mc-cta-strip__btn">
+        Install LinkedAI
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+  <div class="footer__inner">
+    <p class="footer__brand">Growlioo</p>
+    <p class="footer__meta">LinkedIn Audit &nbsp;&middot;&nbsp; Created by Malik Muzamil &nbsp;&middot;&nbsp; 30 June 2026</p>
+  </div>
+</footer>
+
+<script>
+  /* ══════════════════════════════════════════════════
+     GROWLIOO — LINKEDIN OPTIMIZER ANIMATION ENGINE v4
+  ══════════════════════════════════════════════════ */
+
+  /* ── MASTERCLASS ACCORDION ──────────────────────── */
+  function toggleLesson(header) {
+    const lesson = header.closest('.mc-lesson');
+    const isOpen = lesson.classList.contains('open');
+    document.querySelectorAll('.mc-lesson').forEach(l => l.classList.remove('open'));
+    if (!isOpen) lesson.classList.add('open');
+  }
+
+  /* ── COPY UTILITIES ────────────────────────────── */
+  const toast = document.createElement('div');
+  toast.className = 'copy-toast';
+  document.body.appendChild(toast);
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  function copyHex(btn, hex) {
+    navigator.clipboard.writeText(hex).then(() => {
+      btn.classList.add('copied');
+      btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
+      showToast('Copied ' + hex);
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>`;
+      }, 2000);
+    });
+  }
+
+  function copyText(btn, id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    navigator.clipboard.writeText(el.innerText.trim()).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      showToast('Copy ready — paste into LinkedIn');
+      setTimeout(() => btn.textContent = orig, 2000);
+    });
+  }
+
+  /* ── TAB NAVIGATION ────────────────────────────── */
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+    const top = document.querySelector('.cover').offsetHeight + (document.querySelector('.stat-strip')?.offsetHeight || 0);
+    window.scrollTo({ top, behavior: 'smooth' });
+    if (id === 'dashboard') { setTimeout(animDashboard, 80); }
+  }
+
+  /* ── EASING ────────────────────────────────────── */
+  const ease = t => 1 - Math.pow(1 - t, 3);
+  const easeOut = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+
+  /* ── COUNT UP UTILITY ──────────────────────────── */
+  function countUp(el, target, duration, suffix) {
+    const start = performance.now();
+    el.classList.add('counting');
+    (function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      el.textContent = Math.round(easeOut(p) * target) + (suffix || '');
+      if (p < 1) requestAnimationFrame(tick);
+      else { el.textContent = target + (suffix || ''); el.classList.remove('counting'); }
+    })(performance.now());
+  }
+
+  /* ── RING ANIMATION ────────────────────────────── */
+  const SCORE_VAL = 53;
+  const CIRC = 659.73;
+
+  function animRing() {
+    const rf = document.querySelector('.ring-fill');
+    const num = document.querySelector('.ring-score');
+    if (!rf || !num) return;
+    const targetOffset = CIRC - (CIRC * SCORE_VAL / 100);
+    rf.style.transition = 'stroke-dashoffset 2s cubic-bezier(0.16,1,0.3,1)';
+    rf.style.strokeDashoffset = targetOffset;
+    countUp(num, SCORE_VAL, 2000);
+  }
+
+  function animStatCounters() {
+    document.querySelectorAll('[data-count-to]').forEach((el, i) => {
+      const target = +el.dataset.countTo;
+      setTimeout(() => countUp(el.firstElementChild || el, target, 1600), i * 120 + 400);
+    });
+  }
+
+  /* ── DASHBOARD ANIMATIONS ──────────────────────── */
+  function animDashboard() {
+    /* Radar */
+    const rp = document.querySelector('.radar-area');
+    if (rp) {
+      rp.style.transition = 'opacity 0.6s ease';
+      rp.style.fillOpacity = '1';
+      setTimeout(() => document.querySelectorAll('.radar-point').forEach((d,i) =>
+        setTimeout(() => { d.style.opacity = '1'; d.style.transform = 'scale(1)'; }, i*80+300)), 300);
+    }
+    document.querySelectorAll('.legend-bar-fill[data-w]').forEach((el, i) =>
+      setTimeout(() => el.style.width = el.dataset.w + '%', i * 80 + 200));
+
+    /* Score cards — staggered popIn */
+    document.querySelectorAll('.score-card').forEach((el, i) => {
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0) scale(1)';
+        /* Count the score number */
+        const ne = el.querySelector('[data-count]');
+        if (ne) countUp(ne, +ne.dataset.count, 1000);
+        /* Fill bar */
+        const be = el.querySelector('.score-bar-fill[data-w]');
+        if (be) setTimeout(() => be.style.width = be.dataset.w + '%', 100);
+        /* Donut */
+        const de = el.querySelector('.donut-fill[data-offset]');
+        if (de) setTimeout(() => de.style.strokeDashoffset = de.dataset.offset, 150);
+      }, i * 70 + 100);
+    });
+  }
+
+  function animSteps() {
+    document.querySelectorAll('.step-card').forEach((el, i) =>
+      setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateX(0)'; }, i * 90 + 100));
+  }
+  function animProblems() {
+    document.querySelectorAll('.problem-card').forEach((el, i) =>
+      setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; el.classList.add('visible'); }, i * 120 + 100));
+  }
+  function animAudit() {
+    document.querySelectorAll('.audit-card').forEach((el, i) =>
+      setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, i * 100 + 100));
+  }
+
+  /* ── SCROLL-REVEAL OBSERVER ────────────────────── */
+  /* Stat strip triggers ring + counters */
+  const stripObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animRing(); animStatCounters(); stripObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  if (document.querySelector('.stat-strip')) stripObs.observe(document.querySelector('.stat-strip'));
+
+  /* Generic reveal: cards, banners, palettes, CTAs */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const delay = +(el.dataset.revealDelay || 0);
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0) translateX(0) scale(1)';
+        el.classList.add('visible');
+        /* Trigger sub-animations */
+        el.querySelectorAll('.score-bar-fill[data-w]').forEach(b =>
+          setTimeout(() => b.style.width = b.dataset.w + '%', delay + 100));
+        el.querySelectorAll('.donut-fill[data-offset]').forEach(d =>
+          setTimeout(() => d.style.strokeDashoffset = d.dataset.offset, delay + 120));
+        el.querySelectorAll('[data-count]').forEach(ne =>
+          setTimeout(() => countUp(ne, +ne.dataset.count, 1100), delay + 60));
+        el.querySelectorAll('.legend-bar-fill[data-w]').forEach(b =>
+          setTimeout(() => b.style.width = b.dataset.w + '%', delay + 140));
+      }, delay);
+      revealObs.unobserve(el);
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+
+  /* ── SET INITIAL HIDDEN STATE & OBSERVE ────────── */
+  document.querySelectorAll('.score-card').forEach((el, i) => {
+    el.style.cssText += 'opacity:0;transform:translateY(24px) scale(0.97);transition:opacity .5s ease,transform .5s cubic-bezier(0.34,1.56,0.64,1);';
+    el.dataset.revealDelay = i * 55;
+    revealObs.observe(el);
+  });
+  document.querySelectorAll('.problem-card').forEach((el, i) => {
+    el.style.cssText += 'opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;';
+    el.dataset.revealDelay = i * 90;
+    revealObs.observe(el);
+  });
+  document.querySelectorAll('.audit-card').forEach((el, i) => {
+    el.style.cssText += 'opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;';
+    el.dataset.revealDelay = i * 65;
+    revealObs.observe(el);
+  });
+  document.querySelectorAll('.step-card').forEach((el, i) => {
+    el.style.cssText += 'opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease;';
+    el.dataset.revealDelay = i * 80;
+    revealObs.observe(el);
+  });
+  document.querySelectorAll('.banner-brief,.wcta,.palette-card,.color-card').forEach((el, i) => {
+    el.style.cssText += 'opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;';
+    el.dataset.revealDelay = i * 40;
+    revealObs.observe(el);
+  });
+
+  /* Radar initial state */
+  document.querySelectorAll('.radar-area').forEach(el => { el.style.fillOpacity = '0'; });
+  document.querySelectorAll('.radar-point').forEach(el => {
+    el.style.opacity = '0'; el.style.transform = 'scale(0)';
+    el.style.transition = 'opacity 0.4s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1)';
+  });
+
+  /* Boot dashboard on initial load */
+  setTimeout(animDashboard, 350);
+</script>
+
+<!-- ══════════════════════════════════════════════════
+     GROWLIOO AUDIT DATA — PROGRESS MODE
+     To run a V2 Progress Audit:
+     1. Open this file in your browser
+     2. Scroll here and copy the JSON below
+     3. Paste it into chat + your updated screenshot
+     The skill will compare V1 vs V2 automatically.
+══════════════════════════════════════════════════ -->
+<script id="audit-data" type="application/json">
+{
+  "audit_id": "GRW-20260630-Azam",
+  "version": 1,
+  "client_name": "Azam Beyk",
+  "date": "30 June 2026",
+  "score": 53,
+  "grade": "C",
+  "section_scores": {
+    "photo": 7,
+    "banner": 7,
+    "headline": 6,
+    "about": 6,
+    "featured": 0,
+    "experience": 7,
+    "skills": 5,
+    "content": 5,
+    "niche": 5
+  },
+  "top_problems": ["Featured section is completely empty", "Headline and About lean on abstract vision language instead of naming who NIIOMA serves", "Experience section buries strong results inside task descriptions"],
+  "previous_version": null
+}
+</script>
+</body>
+</html>
